@@ -1,0 +1,21 @@
+name: Validate leadScaler 78-Node n8n Workflow & Backend
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile Python Backend & Workflow Builder
+        run: python3 -m py_compile workflows/build_n8n_workflow.py backend/smart_leadflow_web.py backend/mailmeteor_race_server.py
+      - name: Run 78-Node n8n Graph, JS Code & Secret-Safety Suite
+        run: npm test

@@ -1,0 +1,18 @@
+# Environment & secrets
+.env
+.env.*
+!.env.example
+*with-api-keys*.json
+*.pem
+*.key
+.vps_ssh/
+
+# Databases & runtime caches
+*.sqlite
+*.sqlite3
+*.db
+__pycache__/
+*.pyc
+node_modules/
+.netlify/
+.DS_Store

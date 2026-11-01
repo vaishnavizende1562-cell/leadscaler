@@ -1,0 +1,2522 @@
+{
+  "id": "SmartLeadFlowV1",
+  "name": "B2B Smart LeadFlow · Locked Architecture (v1)",
+  "nodes": [
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000001",
+      "name": "Zone 1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2220,
+        -170
+      ],
+      "parameters": {
+        "content": "## STAGE 01–03 · PUBLIC PROMPT INTAKE, MAX-5 LOCK & PARALLEL SPLIT\n- Single Prompt input from Public Web UI\n- Strict **Max 5 Leads / Run** cap (protects free API credits)\n- Loads **Saved Email Template** + **Excluded Old Leads** (`Make 5 Another Leads`)\n- Fires **Parallel Backup Race (LeadPulse AI + TinyFish AI)** + **Free Lead AI Waterfall**",
+        "width": 820,
+        "height": 390,
+        "color": 5
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000002",
+      "name": "Zone 2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1380,
+        -650
+      ],
+      "parameters": {
+        "content": "## PARALLEL BACKUP RACE · LEADPULSE AI vs TINYFISH AI (3B-1, 3B-2, 3C)\n- **3B-1 LeadPulse AI** & **3B-2 TinyFish AI** start **simultaneously** in parallel\n- **First-Result-Wins Race:** Jiska result pehle aata hai woh turant jeet kar aage jaata hai (slow racer auto-cancel!)\n- **Standby Guard:** Agar Free Waterfall 5 leads de de, toh Mailmeteor bilkul skip rehta hai!",
+        "width": 920,
+        "height": 440,
+        "color": 6
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000003",
+      "name": "Zone 3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1360,
+        -170
+      ],
+      "parameters": {
+        "content": "## STAGE 04 · FREE LEAD AI WATERFALL (1-by-1 Minimum Credit Chain) + GREEN EXPRESS BYPASS\n- **Priority (Default Pathway):** `4.1 Prospeo #1` -> `4.2 Prospeo #2` -> `4.25 Clay #1` -> `4.26 Clay #2` -> `4.3 Hunter.io` -> `4.4 Apollo.io` -> `+4.5 Future Lead API Slot`\n- **Stop-on-5 Rule:** Jaise hi 5 unique leads poore hon, **Green Express Bypass Rail** baaki saare APIs skip kar deti hai!\n- **Pathway Option:** User `TinyFish` pathway chune toh Stage 04 `0ms` me bypass hokar seedha TinyFish -> Smart Email Guesser -> Mailmeteor par jaata hai.",
+        "width": 5040,
+        "height": 610,
+        "color": 4
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000004",
+      "name": "Zone 4",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3720,
+        -520
+      ],
+      "parameters": {
+        "content": "## STAGE 05 · SUFFICIENCY GATE, SMART EMAIL GUESSER (TIME-CAPPED) & MAILMETEOR WEB CHECKER\n- **YES (5 Free Leads Ready):** Skip Backup Race & Skip Mailmeteor (`0` checks)\n- **NO / <5 Leads (or TinyFish Pathway):** `5B` TinyFish/Race Leads -> **`5G` Smart Email Pattern Guesser (Hard Time Cap <=8s/lead, <=20s total)** -> `5C` Check **ONE BY ONE** on **`https://mailmeteor.com/email-checker`** + `+5D`",
+        "width": 1520,
+        "height": 740,
+        "color": 3
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000005",
+      "name": "Zone 5",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        5280,
+        -180
+      ],
+      "parameters": {
+        "content": "## STAGE 06–07 · LOCK 5 UNIQUE LEADS + SMART LINKEDIN + TINYFISH\n- Deduplicate against current batch + all previous batches\n- **7L Smart LinkedIn:** Direct Profile URL else Auto `Name + Company` LinkedIn Search URL\n- **7R TinyFish API:** Official company website finder *(called ONLY if website missing)* + `+7R Extra Scraper Slot`",
+        "width": 980,
+        "height": 420,
+        "color": 6
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000006",
+      "name": "Zone 6",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        6300,
+        -180
+      ],
+      "parameters": {
+        "content": "## STAGE 08 · SAVED EMAIL TEMPLATE + MULTI-LLM FAILOVER\n- Loads User's pre-set **\"My Email Template\"** (`8L`)\n- Personalizes Subject & Body per lead (**Zero fake emails / Zero hallucinated facts**)\n- **Auto-Failover:** Primary LLM (`xKiro`) -> Backup LLM (`APInex / Gemini`) + `+8R Extra LLM Keys Slot`",
+        "width": 1240,
+        "height": 560,
+        "color": 4
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000007",
+      "name": "Zone 7",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        7580,
+        -180
+      ],
+      "parameters": {
+        "content": "## STAGE 09–11 · PROMPT HISTORY, CSV EXPORT & \"MAKE 5 ANOTHER LEADS\"\n- Saves Prompt + 5 Leads + Exclusion Keys + Quota Log\n- Returns `nextBatchRequest` so clicking **\"Make 5 Another Leads\"** loops back to Stage 02 for **Leads 6–10, 11–15...**",
+        "width": 780,
+        "height": 420,
+        "color": 7
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000008",
+      "name": "Zone 8",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2220,
+        540
+      ],
+      "parameters": {
+        "content": "## COMPANION PUBLIC UI ENDPOINTS\n- `POST /webhook/b2b-smart-leads-template` -> Save/Update **\"My Email Template\"**\n- `GET /webhook/b2b-smart-leads-history` -> Load **Prompt History, Previous Lead Batches & Quota Log**\n- `GET /webhook/b2b-smart-leads-health` -> Live **11-Stage Readiness & Provider Status**",
+        "width": 1180,
+        "height": 760,
+        "color": 5
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000010",
+      "name": "01 · Public UI Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -2140,
+        0
+      ],
+      "webhookId": "b2b-smart-leads-main",
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "b2b-smart-leads",
+        "responseMode": "responseNode",
+        "options": {}
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000011",
+      "name": "02 · Batch Lock (Max 5) & Dedupe Memory",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1880,
+        0
+      ],
+      "parameters": {
+        "jsCode": "\nconst raw = $input.first().json;\nconst body = (raw && typeof raw.body === 'object' && raw.body !== null) ? raw.body : raw;\nconst prompt = String(body.prompt || '').trim();\nif (prompt.length < 3) {\n  throw new Error('Please provide a valid B2B lead generation prompt (min 3 chars).');\n}\n\n// Persistent Workflow Memory (Prompt History, Exclusion Keys, Saved Email Template, Quota Log)\nconst store = $getWorkflowStaticData('global');\nif (!store.templates) store.templates = {};\nif (!store.seenByPrompt) store.seenByPrompt = {};\nif (!store.history) store.history = [];\nif (!store.quotaLog) {\n  store.quotaLog = {\n    prospeo_1_calls: 0,\n    prospeo_2_calls: 0,\n    clay_1_calls: 0,\n    clay_2_calls: 0,\n    hunter_calls: 0,\n    apollo_calls: 0,\n    leadpulse_fallbacks: 0,\n    mailmeteor_verifications: 0,\n    tinyfish_enrichments: 0,\n    llm_personalizations: 0\n  };\n}\n\nconst userId = String(body.userId || 'public_default').trim() || 'public_default';\nconst promptKey = (userId + '::' + prompt.toLowerCase().replace(/\\s+/g, ' ')).slice(0, 220);\n\nif (!store.seenByPrompt[promptKey]) {\n  store.seenByPrompt[promptKey] = { keys: [], companies: [], batches: 0 };\n}\nconst promptMem = store.seenByPrompt[promptKey];\n\n// Enforce STRICT MAX 5 LEADS PER RUN (Locked Rule #2)\nconst maxLeads = 5;\n\n// Merge excluded leads from both persistent memory (if makeAnother5 / repeat prompt) & client payload\nconst clientReset = Boolean(body.resetHistory === true);\nif (clientReset) {\n  promptMem.keys = [];\n  promptMem.companies = [];\n  promptMem.batches = 0;\n}\n\nconst excludedLeadKeys = Array.from(new Set([\n  ...(Array.isArray(body.excludedLeadKeys) ? body.excludedLeadKeys.map(x => String(x).toLowerCase().trim()) : []),\n  ...(body.makeAnother5 !== false ? promptMem.keys : [])\n])).filter(Boolean);\n\nconst excludeCompanies = Array.from(new Set([\n  ...(Array.isArray(body.excludeCompanies) ? body.excludeCompanies.map(x => String(x).trim()) : []),\n  ...(body.makeAnother5 !== false ? promptMem.companies : [])\n])).filter(Boolean);\n\nconst batchNumber = Number(body.batchNumber) || (promptMem.batches + 1);\n\n// Load or update User's Pre-Saved \"My Email Template\" (Locked Rule #8)\nconst reqSender = String(body.senderName || 'Vaishnavi Zende').trim();\nconst reqOffer = String(body.offer || 'streamline operations and accelerate B2B growth with AI automation').trim();\nconst defaultTemplate = {\n  subject: \"Quick collaboration idea for {{companyName}}\",\n  body: `Hi {{decisionMakerName}},\\n\\nI came across {{companyName}} and was impressed by your work in {{industry}}.\\n\\nWe help B2B teams ${reqOffer}, and I thought this could be valuable for your role as {{jobTitle}}.\\n\\nWould you be open to a brief 10-minute chat this week?\\n\\nBest regards,\\n{{senderName}}`,\n  senderName: reqSender,\n  senderCompany: String(body.senderCompany || '')\n};\n\nif (body.emailTemplate && (body.emailTemplate.subject || body.emailTemplate.body)) {\n  store.templates[userId] = {\n    subject: String(body.emailTemplate.subject || defaultTemplate.subject),\n    body: String(body.emailTemplate.body || defaultTemplate.body),\n    senderName: String(body.emailTemplate.senderName || defaultTemplate.senderName),\n    senderCompany: String(body.emailTemplate.senderCompany || '')\n  };\n}\nconst savedTemplate = store.templates[userId] || defaultTemplate;\n\n// Lightweight Zero-Credit Prompt Parser (extracts roles, location, industry hints)\nconst roleMap = [\n  ['co-founder', 'Co-Founder'], ['founder', 'Founder'], ['ceo', 'CEO'],\n  ['cto', 'CTO'], ['coo', 'COO'], ['cmo', 'CMO'], ['cfo', 'CFO'],\n  ['owner', 'Owner'], ['managing director', 'Managing Director'],\n  ['sales director', 'Sales Director'], ['head of sales', 'Head of Sales'],\n  ['head of growth', 'Head of Growth'], ['head of operations', 'Head of Operations'],\n  ['operations manager', 'Operations Manager'], ['vp', 'VP'], ['director', 'Director'],\n  ['partner', 'Partner'], ['president', 'President']\n];\nconst matchedRoles = [];\nfor (const [pat, label] of roleMap) {\n  if (new RegExp(`\\\\b${pat.replace(/[-]/g, '[- ]?')}s?\\\\b`, 'i').test(prompt)) matchedRoles.push(label);\n}\nif (matchedRoles.includes('Founder') && !matchedRoles.includes('Co-Founder')) matchedRoles.push('Co-Founder');\nif (matchedRoles.includes('CEO') && matchedRoles.length === 1) {\n  matchedRoles.push('Managing Director', 'Founder', 'Director');\n}\nconst fallbackRoles = matchedRoles.length ? matchedRoles : ['Founder', 'Co-Founder', 'CEO', 'Managing Director', 'Director', 'Owner'];\n\n// Built-in Canonical Prospeo Industry Map (fallback when webhook called directly without Web UI resolver)\nconst indMap = [\n  [/\\b(chemical|chemicals|petrochemical|agrochemical|specialty chemical)\\b/i, ['Chemical Manufacturing', 'Wholesale Chemical and Allied Products', 'Paint, Coating, and Adhesive Manufacturing']],\n  [/\\b(pharma|pharmaceutical|biotech|biotechnology)\\b/i, ['Pharmaceutical Manufacturing', 'Biotechnology Research']],\n  [/\\b(plastic|plastics|polymer|polymers|rubber)\\b/i, ['Plastics Manufacturing', 'Plastics and Rubber Product Manufacturing']],\n  [/\\b(packaging|containers)\\b/i, ['Packaging and Containers']],\n  [/\\b(paint|coating|adhesive)\\b/i, ['Paint, Coating, and Adhesive Manufacturing']],\n  [/\\b(textile|garment|apparel|fashion)\\b/i, ['Textile Manufacturing', 'Apparel Manufacturing', 'Retail Apparel and Fashion']],\n  [/\\b(milk|dairy|ghee|paneer|curd|ice cream)\\b/i, ['Dairy Product Manufacturing', 'Food and Beverage Manufacturing']],\n  [/\\b(chocolate|cocoa|confectionery|bakery|snack|coffee|tea|beverage|food|fmcg)\\b/i, ['Food and Beverage Manufacturing', 'Food and Beverage Services']],\n  [/\\b(airline|airlines|aviation|airways)\\b/i, ['Airlines and Aviation']],\n  [/\\b(solar|renewable|clean energy)\\b/i, ['Renewable Energy', 'Electric Power Generation']],\n  [/\\b(oil|gas|mining|petroleum)\\b/i, ['Oil, Gas, and Mining']],\n  [/\\b(construction|civil engineering|building material|builder)\\b/i, ['Construction', 'Civil Engineering', 'Building Materials']],\n  [/\\b(real estate|proptech|property)\\b/i, ['Real Estate']],\n  [/\\b(automotive|automobile|motor vehicle|ev)\\b/i, ['Motor Vehicle Manufacturing', 'Automotive']],\n  [/\\b(electronic|electronics|electrical|semiconductor|hardware)\\b/i, ['Appliances, Electrical, and Electronics Manufacturing', 'Semiconductor Manufacturing', 'Computer Hardware']],\n  [/\\b(machinery|industrial|automation machinery)\\b/i, ['Industrial Machinery Manufacturing', 'Machinery Manufacturing', 'Automation Machinery Manufacturing']],\n  [/\\b(manufacturing|manufacturer|factory)\\b/i, ['General Manufacturing', 'Industrial Machinery Manufacturing']],\n  [/\\b(logistics|supply chain|freight|transport|warehousing)\\b/i, ['Transportation, Logistics, Supply Chain and Storage', 'Freight and Package Transportation', 'Warehousing and Storage']],\n  [/\\b(healthcare|hospital|medical|clinic|healthtech|dental)\\b/i, ['Hospitals and Health Care', 'Medical Practices', 'Medical Equipment Manufacturing']],\n  [/\\b(education|edtech|e-learning|school|university)\\b/i, ['E-Learning Providers', 'Higher Education', 'Education Administration Programs']],\n  [/\\b(fintech|financial|finance|banking|insurance|wealth|investment)\\b/i, ['Financial Services', 'Banking', 'Investment Management', 'Insurance']],\n  [/\\b(ecommerce|e-commerce|online retail|d2c|retail)\\b/i, ['Online and Mail Order Retail', 'General Retail']],\n  [/\\b(marketing|advertising|ad agency|digital agency|pr)\\b/i, ['Marketing Services', 'Advertising Services', 'Public Relations and Communications Services']],\n  [/\\b(cybersecurity|network security|infosec)\\b/i, ['Computer and Network Security', 'Data Security Software Products']],\n  [/\\b(saas|software|cloud|devops)\\b/i, ['Software Development', 'Technology, Information and Internet', 'IT Services and IT Consulting']],\n  [/\\b(ai|artificial intelligence|machine learning|data|analytics)\\b/i, ['Software Development', 'Data Infrastructure and Analytics', 'Technology, Information and Internet']],\n  [/\\b(it services|it consulting|it company|tech)\\b/i, ['IT Services and IT Consulting', 'Software Development']],\n  [/\\b(consulting|consultancy|professional services)\\b/i, ['Business Consulting and Services', 'Professional Services']],\n  [/\\b(cosmetic|beauty|personal care|skincare)\\b/i, ['Cosmetics', 'Personal Care Product Manufacturing']],\n  [/\\b(hospitality|hotel|restaurant|travel)\\b/i, ['Hospitality', 'Restaurants', 'Travel Arrangements']],\n  [/\\b(legal|law firm)\\b/i, ['Law Practice', 'Legal Services']],\n  [/\\b(agriculture|farming|agri)\\b/i, ['Farming', 'Agriculture, Construction, Mining Machinery Manufacturing']]\n];\n\nconst fallbackIndustries = [];\nfor (const [rx, vals] of indMap) {\n  if (rx.test(prompt)) {\n    for (const v of vals) { if (!fallbackIndustries.includes(v)) fallbackIndustries.push(v); }\n  }\n}\n\nconst locMap = {\n  'usa': 'United States', 'united states': 'United States', 'us': 'United States',\n  'california': 'California, United States', 'texas': 'Texas, United States', 'new york': 'New York, United States',\n  'india': 'India', 'delhi': 'Delhi, India', 'new delhi': 'Delhi, India',\n  'mumbai': 'Maharashtra, India', 'pune': 'Maharashtra, India',\n  'bangalore': 'Karnataka, India', 'bengaluru': 'Karnataka, India',\n  'hyderabad': 'Telangana, India', 'chennai': 'Tamil Nadu, India',\n  'ahmedabad': 'Gujarat, India', 'surat': 'Gujarat, India',\n  'noida': 'Uttar Pradesh, India', 'gurgaon': 'Haryana, India', 'gurugram': 'Haryana, India',\n  'kolkata': 'West Bengal, India', 'jaipur': 'Rajasthan, India',\n  'uk': 'United Kingdom', 'united kingdom': 'United Kingdom', 'london': 'London, England, United Kingdom',\n  'uae': 'United Arab Emirates', 'dubai': 'Dubai, United Arab Emirates',\n  'canada': 'Canada', 'germany': 'Germany', 'australia': 'Australia', 'singapore': 'Singapore'\n};\nconst locMatch = prompt.match(/\\b(New Delhi|Delhi|United States|USA|United Kingdom|UK|Mumbai|Bangalore|Bengaluru|Hyderabad|Pune|Chennai|Ahmedabad|Surat|Noida|Gurgaon|Gurugram|Kolkata|Jaipur|India|Canada|Germany|UAE|Dubai|Australia|Singapore|New York|Texas|California)\\b/i);\nconst fallbackLoc = locMatch ? (locMap[locMatch[1].toLowerCase()] || locMatch[1]) : '';\n\n// Extract meaningful niche keywords (excluding generic filler/location/role words)\nconst stopWords = new Set(['find','search','get','give','me','top','best','list','of','companies','company','business','businesses','firms','startups','startup','in','at','from','near','around','for','with','and','or','the','a','an','to','by','employees','employee','size','decision','makers','maker','role','roles','ceo','ceos','cto','ctos','cfo','coo','cmo','founder','founders','cofounder','owner','owners','director','directors','managing','head','sales','vp','president','partner','india','delhi','new','mumbai','bangalore','bengaluru','hyderabad','pune','chennai','ahmedabad','surat','noida','gurgaon','gurugram','kolkata','jaipur','usa','united','states','kingdom','uk','dubai','uae','canada','germany','australia','singapore','california','texas','york','london','extra']);\nconst rawWords = prompt.toLowerCase().replace(/[^a-z0-9\\s-]/g, ' ').split(/\\s+/).filter(w => w.length >= 3 && !stopWords.has(w) && !/^\\d+$/.test(w));\nconst clientKws = Array.isArray(body.industryKeywords) ? body.industryKeywords.map(k => String(k).toLowerCase().trim()).filter(Boolean) : [];\nconst industryKeywords = Array.from(new Set([...clientKws, ...rawWords])).slice(0, 12);\n\nconst pfIn = (body.prospeoFilters && typeof body.prospeoFilters === 'object') ? body.prospeoFilters : {};\nconst resolvedRoles = (Array.isArray(pfIn.roles) && pfIn.roles.length) ? pfIn.roles : fallbackRoles;\nconst resolvedLocations = (Array.isArray(pfIn.locations) && pfIn.locations.length) ? pfIn.locations : (fallbackLoc ? [fallbackLoc] : []);\nconst resolvedIndustries = (Array.isArray(pfIn.industries) && pfIn.industries.length) ? pfIn.industries : fallbackIndustries;\nconst resolvedHeadcount = (Array.isArray(pfIn.headcountRanges) && pfIn.headcountRanges.length) ? pfIn.headcountRanges : [];\nconst resolvedKeywords = (Array.isArray(pfIn.keywords) && pfIn.keywords.length)\n  ? pfIn.keywords\n  : (resolvedIndustries.length === 0 && industryKeywords.length > 0 ? industryKeywords.slice(0, 6) : []);\n\nconst resolvedExcludeIndustries = Array.isArray(pfIn.excludeIndustries) ? pfIn.excludeIndustries : [];\nconst mustMatchKeywords = Array.isArray(pfIn.mustMatchKeywords) ? pfIn.mustMatchKeywords.map(k => String(k).toLowerCase().trim()).filter(Boolean) : [];\nconst mustExcludeTerms = Array.isArray(pfIn.mustExcludeTerms) ? pfIn.mustExcludeTerms.map(k => String(k).toLowerCase().trim()).filter(Boolean) : [];\nconst coreNicheRoots = Array.isArray(pfIn.coreNicheRoots) ? pfIn.coreNicheRoots.map(k => String(k).toLowerCase().trim()).filter(Boolean) : [];\nconst targetWebsites = Array.isArray(pfIn.websites) ? pfIn.websites.filter(Boolean) : [];\nconst targetCompanyNames = Array.isArray(pfIn.companyNames) ? pfIn.companyNames.filter(Boolean) : [];\n\n// Pathway selection: DEFAULT is ALWAYS 'free_apis' (Prospeo #1 -> Prospeo #2 -> Clay #1 -> Clay #2 -> Hunter -> Apollo)\nconst rawPathway = String(body.pathway || '').trim().toLowerCase();\nconst pathway = (rawPathway === 'tinyfish') ? 'tinyfish' : 'free_apis';\nconst forceTinyFishPathway = (pathway === 'tinyfish');\nconst skipFreeWaterfall = Boolean(body.forceBackupRaceTest || forceTinyFishPathway);\n\n// Map known pure company names -> domains so Clay people search results resolve corporate domains in 0ms\nconst websiteByCompanyNorm = {};\nfor (let i = 0; i < Math.min(targetCompanyNames.length, targetWebsites.length); i++) {\n  const cn = String(targetCompanyNames[i] || '').toLowerCase().replace(/[^a-z0-9]/g, '');\n  const dm = String(targetWebsites[i] || '').toLowerCase().replace(/^https?:\\/\\/(www\\.)?/, '').split('/')[0].trim();\n  if (cn && dm && dm.includes('.')) websiteByCompanyNorm[cn] = dm;\n}\n\n// Build Official Clay GTM Query-Mode Search String (POST https://api.clay.com/public/v0/search/query-mode)\nconst clayRoleList = resolvedRoles.slice(0, 6).map(r => `\"${String(r).replace(/\"/g, '')}\"`).join(', ');\nconst exCoNormSet = new Set(excludeCompanies.map(c => String(c || '').toLowerCase().replace(/[^a-z0-9]/g, '')).filter(Boolean));\nconst skipProviders = Array.isArray(body.skipProviders) ? body.skipProviders.map(x => String(x || '').trim().toLowerCase()) : [];\n\nconst nicheTermsRaw = [\n  ...mustMatchKeywords.slice(0, 4),\n  ...industryKeywords.slice(0, 3),\n  ...(resolvedIndustries.slice(0, 2))\n].map(s => String(s || '').replace(/\"/g, '').trim()).filter(s => s.length >= 2);\nconst uniqNicheTerms = Array.from(new Set(nicheTermsRaw)).slice(0, 4);\nconst clayNicheCsv = (uniqNicheTerms.length > 0 ? uniqNicheTerms : [prompt.slice(0, 45).replace(/\"/g, '').trim() || 'B2B'])\n  .map(t => `\"${t}\"`).join(', ');\n\nconst loc0 = String(resolvedLocations[0] || '').toLowerCase();\nlet locClause = '';\nif (loc0.includes('india')) locClause += ' and location_country = \"India\"';\nelse if (loc0.includes('united states')) locClause += ' and location_country = \"United States\"';\nelse if (loc0.includes('united kingdom')) locClause += ' and location_country = \"United Kingdom\"';\nelse if (loc0.includes('canada')) locClause += ' and location_country = \"Canada\"';\nelse if (loc0.includes('australia')) locClause += ' and location_country = \"Australia\"';\nelse if (loc0.includes('germany')) locClause += ' and location_country = \"Germany\"';\nelse if (loc0.includes('singapore')) locClause += ' and location_country = \"Singapore\"';\nelse if (loc0.includes('united arab emirates')) locClause += ' and location_country = \"United Arab Emirates\"';\n\nconst stateHints = [\n  ['delhi', 'Delhi'], ['mumbai', 'Maharashtra'], ['pune', 'Maharashtra'], ['maharashtra', 'Maharashtra'],\n  ['bengaluru', 'Karnataka'], ['bangalore', 'Karnataka'], ['karnataka', 'Karnataka'],\n  ['hyderabad', 'Telangana'], ['telangana', 'Telangana'],\n  ['chennai', 'Tamil Nadu'], ['tamil nadu', 'Tamil Nadu'],\n  ['ahmedabad', 'Gujarat'], ['surat', 'Gujarat'], ['gujarat', 'Gujarat'],\n  ['kolkata', 'West Bengal'], ['west bengal', 'West Bengal'],\n  ['gurugram', 'Haryana'], ['gurgaon', 'Haryana'], ['haryana', 'Haryana'],\n  ['noida', 'Uttar Pradesh'], ['uttar pradesh', 'Uttar Pradesh'],\n  ['jaipur', 'Rajasthan'], ['rajasthan', 'Rajasthan']\n];\nfor (const [k, stName] of stateHints) {\n  if (loc0.includes(k)) {\n    locClause += ` and location_state = \"${stName}\"`;\n    break;\n  }\n}\n\nconst claySearchQuery = `select from people where experiences.any(is_current = true and job_title is_similar_to (${clayRoleList}) and company.products_and_services is_similar_to (${clayNicheCsv}))` + locClause;\n\nconst countryOnlyLocations = resolvedLocations\n  .map(l => {\n    const parts = String(l || '').split(',').map(s => s.trim()).filter(Boolean);\n    return parts.length > 1 ? parts[parts.length - 1] : parts[0];\n  })\n  .filter(Boolean);\n\nconst searchPage = Math.max(1, Math.floor((excludedLeadKeys.length || 0) / 12) + 1);\nconst buildProspeoFilterObj = (pageOffset = 0, variant = 1) => {\n  const f = {\n    max_person_per_company: 1,\n    person_job_title: { include: resolvedRoles.slice(0, 8) }\n  };\n  const indBlock = {};\n  if (resolvedIndustries.length > 0) indBlock.include = resolvedIndustries.slice(0, 15);\n  if (resolvedExcludeIndustries.length > 0) indBlock.exclude = resolvedExcludeIndustries.slice(0, 25);\n\n  // Case A: Canonical Prospeo industries exist (e.g. Dairy Product Manufacturing, Airlines and Aviation, Chemical Manufacturing, Pharma)\n  // Variant 1 searches the full Prospeo industry + keywords + exact city/country (returns 25+ hits!).\n  // Variant 2 searches AI-discovered pure websites (using country-level location so NCR/suburb HQs aren't dropped) or page+1!\n  if (resolvedIndustries.length > 0) {\n    if (variant === 2 && targetWebsites.length >= 5) {\n      if (countryOnlyLocations.length > 0) {\n        f.company_location_search = { include: Array.from(new Set(countryOnlyLocations)).slice(0, 3) };\n      }\n      f.company = {\n        websites: { include: targetWebsites.slice(0, 50) },\n        ...(excludeCompanies.length > 0 ? { names: { exclude: excludeCompanies.slice(0, 100) } } : {})\n      };\n      if (indBlock.exclude) f.company_industry = { exclude: indBlock.exclude };\n      return { page: 1, filters: f };\n    }\n    if (resolvedLocations.length > 0) {\n      f.company_location_search = { include: resolvedLocations.slice(0, 5) };\n    }\n    f.company_industry = indBlock;\n    if (resolvedKeywords.length > 0) {\n      f.company_keywords = {\n        include: resolvedKeywords.slice(0, 10),\n        include_all: false,\n        search_everywhere: false,\n        sources: ['specialties', 'products_services', 'ai_description', 'seo_description']\n      };\n    }\n    if (resolvedHeadcount.length > 0) {\n      f.company_headcount_range = resolvedHeadcount;\n    }\n    if (excludeCompanies.length > 0) {\n      f.company = { names: { exclude: excludeCompanies.slice(0, 100) } };\n    }\n    return { page: searchPage + pageOffset, filters: f };\n  }\n\n  // Case B: Pure sub-niche with NO canonical Prospeo industry (e.g. \"chocolate companies\", \"coffee brands\")\n  if (variant === 1 && targetWebsites.length > 0) {\n    if (countryOnlyLocations.length > 0) {\n      f.company_location_search = { include: Array.from(new Set(countryOnlyLocations)).slice(0, 3) };\n    }\n    f.company = {\n      websites: { include: targetWebsites.slice(0, 50) },\n      ...(excludeCompanies.length > 0 ? { names: { exclude: excludeCompanies.slice(0, 100) } } : {})\n    };\n    if (indBlock.exclude) f.company_industry = { exclude: indBlock.exclude };\n    return { page: 1, filters: f };\n  }\n  if (variant === 2 && targetCompanyNames.length > 0) {\n    if (countryOnlyLocations.length > 0) {\n      f.company_location_search = { include: Array.from(new Set(countryOnlyLocations)).slice(0, 3) };\n    }\n    f.company = {\n      names: {\n        include: targetCompanyNames.slice(0, 50),\n        ...(excludeCompanies.length > 0 ? { exclude: excludeCompanies.slice(0, 100) } : {})\n      }\n    };\n    if (indBlock.exclude) f.company_industry = { exclude: indBlock.exclude };\n    return { page: 1, filters: f };\n  }\n\n  if (resolvedLocations.length > 0) {\n    f.company_location_search = { include: resolvedLocations.slice(0, 5) };\n  }\n  if (Object.keys(indBlock).length > 0) {\n    f.company_industry = indBlock;\n  }\n  if (resolvedKeywords.length > 0) {\n    f.company_keywords = {\n      include: resolvedKeywords.slice(0, 10),\n      include_all: false,\n      search_everywhere: false,\n      sources: ['specialties', 'products_services', 'ai_description', 'seo_description']\n    };\n  }\n  if (resolvedHeadcount.length > 0) {\n    f.company_headcount_range = resolvedHeadcount;\n  }\n  if (excludeCompanies.length > 0) {\n    f.company = { names: { exclude: excludeCompanies.slice(0, 100) } };\n  }\n  return { page: searchPage + pageOffset, filters: f };\n};\n\nreturn [{\n  json: {\n    requestId: 'req_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7),\n    userId,\n    prompt,\n    promptKey,\n    batchNumber,\n    maxLeads,\n    pathway,\n    forceTinyFishPathway,\n    forceBackupRaceTest: Boolean(body.forceBackupRaceTest),\n    skipProviders,\n    needed: skipFreeWaterfall ? 0 : maxLeads,\n    excludedLeadKeys,\n    excludeCompanies,\n    savedTemplate,\n    parsedCriteria: {\n      roles: resolvedRoles,\n      primaryRoleHint: String(pfIn.primaryRoleHint || '').toLowerCase(),\n      location: resolvedLocations[0] || '',\n      locations: resolvedLocations,\n      industries: resolvedIndustries,\n      excludeIndustries: resolvedExcludeIndustries,\n      mustMatchKeywords,\n      mustExcludeTerms,\n      coreNicheRoots,\n      keywords: resolvedKeywords,\n      rawPrompt: prompt,\n      industryKeywords,\n      targetWebsites,\n      targetCompanyNames,\n      websiteByCompanyNorm,\n      claySearchQuery,\n      hasProspeoIndustryFilter: (resolvedIndustries.length > 0 || resolvedKeywords.length > 0 || targetWebsites.length > 0 || targetCompanyNames.length > 0),\n      strictIndustry: Boolean(body.strictIndustry !== false && (resolvedIndustries.length > 0 || industryKeywords.length > 0 || mustMatchKeywords.length > 0)),\n      searchPage,\n      prospeoPayload1: buildProspeoFilterObj(0, 1),\n      prospeoPayload2: buildProspeoFilterObj(1, 2)\n    },\n    freeLeads: [],\n    providerTrace: []\n  }\n}];\n"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000012",
+      "name": "03 · Dual-Track Parallel Split Router",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1620,
+        0
+      ],
+      "parameters": {
+        "jsCode": "\n// Stage 03: Pass identical state simultaneously to Parallel LeadPulse Backup (3B) AND Free Lead AI Waterfall (4.1)\nconst state = $input.first().json;\nreturn [{ json: { ...state, splitTimestamp: new Date().toISOString() } }];\n"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000020",
+      "name": "3B-1 · LeadPulse AI (Parallel Racer A)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1300,
+        -510
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "http://172.18.0.1:8097/racer/leadpulse",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 160000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ raceId: $json.requestId, prompt: $json.prompt, count: 5, pathway: $json.pathway || 'free_apis', onlyTinyfish: Boolean($json.forceTinyFishPathway), excludeCompanies: $json.excludeCompanies || [], preferredCompanies: $json.parsedCriteria.targetCompanyNames || [], preferredDomains: $json.parsedCriteria.targetWebsites || [] }) }}"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000022",
+      "name": "3B-2 · TinyFish AI (Parallel Racer B)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1300,
+        -310
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "http://172.18.0.1:8097/racer/tinyfish",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 130000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ raceId: $json.requestId, prompt: $json.prompt, count: 5, pathway: $json.pathway || 'free_apis', onlyTinyfish: Boolean($json.forceTinyFishPathway), excludeCompanies: $json.excludeCompanies || [], preferredCompanies: $json.parsedCriteria.targetCompanyNames || [], preferredDomains: $json.parsedCriteria.targetWebsites || [] }) }}"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000023",
+      "name": "3B-Sync · Collect Parallel Racers",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -1030,
+        -410
+      ],
+      "parameters": {
+        "mode": "append",
+        "numberInputs": 2,
+        "options": {}
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000021",
+      "name": "3C · First-Finish Race Winner (To Mailmeteor)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -780,
+        -410
+      ],
+      "parameters": {
+        "jsCode": "\nconst base = $('03 · Dual-Track Parallel Split Router').first().json;\nconst raceInputs = $input.all().map(x => x.json || {});\n\n// Pick whichever racer won the First-to-Finish race (or whichever returned non-empty leads)\nlet winnerObj = raceInputs.find(r => r.wonRace && Array.isArray(r.leads) && r.leads.length > 0)\n             || raceInputs.find(r => Array.isArray(r.leads) && r.leads.length > 0)\n             || {};\n\nconst raceWinner = String(winnerObj.racer || winnerObj.winner || 'none');\nconst rawLeads = Array.isArray(winnerObj.leads) ? winnerObj.leads : [];\n\nconst normalizedBackup = rawLeads.map(l => ({\n  companyName: String(l.companyName || l.company || '').trim(),\n  officialWebsite: String(l.officialWebsite || l.website || '').trim(),\n  domain: String(l.domain || '').toLowerCase().trim(),\n  companySummary: String(l.companySummary || l.industry || '').slice(0, 220),\n  industry: String(l.industry || ''),\n  location: String(l.location || ''),\n  decisionMakerName: String(l.decisionMakerName || l.name || 'Decision Maker').trim(),\n  jobTitle: String(l.jobTitle || l.role || 'Decision Maker').trim(),\n  linkedinRaw: String(l.linkedinRaw || l.linkedin || '').trim(),\n  email: String(l.email || '').toLowerCase().trim(),\n  candidateEmails: Array.isArray(l.candidateEmails) ? l.candidateEmails : (l.email ? [l.email] : []),\n  verificationStatus: 'pending_mailmeteor_web',\n  verifiedBy: 'pending',\n  sourceProvider: raceWinner === 'tinyfish_ai' ? 'tinyfish_ai_race_winner' : 'leadpulse_ai_race_winner'\n})).filter(x => x.companyName && x.decisionMakerName);\n\nreturn [{\n  json: {\n    track: 'parallel_backup_race',\n    requestId: base.requestId,\n    raceWinner,\n    raceElapsedMs: Number(winnerObj.elapsedMs || 0),\n    leadpulseStatus: normalizedBackup.length ? `winner_${raceWinner}` : 'empty',\n    backupCount: normalizedBackup.length,\n    backupLeads: normalizedBackup\n  }\n}];\n"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000030",
+      "name": "4.1A · Prospeo #1 Search",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1300,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ ($env.PROSPEO_API_KEY_1 && $json.needed > 0 && !($json.skipProviders || []).includes('prospeo_1')) ? 'https://api.prospeo.io/search-person' : 'http://127.0.0.1:5678/healthz' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-KEY",
+              "value": "={{ $env.PROSPEO_API_KEY_1 ?? '' }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 30000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.parsedCriteria.prospeoPayload1) }}"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000096",
+      "name": "4.1P · Prospeo #1 Rate Guard (2s)",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -1200,
+        0
+      ],
+      "parameters": {
+        "resume": "timeInterval",
+        "amount": 2,
+        "unit": "seconds"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000098",
+      "name": "4.1Q · Select Top ICP Candidates (#1)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1100,
+        0
+      ],
+      "parameters": {
+        "jsCode": "\nconst st = $('03 · Dual-Track Parallel Split Router').first().json;\nconst searchResp = $('4.1A · Prospeo #1 Search').first().json || {};\nconst hasKey = Boolean(($env.PROSPEO_API_KEY_1 || '').trim());\nif (!hasKey || st.needed <= 0 || !Array.isArray(searchResp.results) || searchResp.results.length === 0) {\n  return [{ json: { skipEnrich: true } }];\n}\nconst kws = (st.parsedCriteria?.industryKeywords || []);\nconst mustMatch = (st.parsedCriteria?.mustMatchKeywords || []);\nconst mustExInd = new Set((st.parsedCriteria?.excludeIndustries || []).map(x => String(x).toLowerCase()));\nconst mustExTerms = (st.parsedCriteria?.mustExcludeTerms || []);\nconst coreRoots = (st.parsedCriteria?.coreNicheRoots || []);\nconst roleHint = String(st.parsedCriteria?.primaryRoleHint || '').toLowerCase();\nconst exCos = new Set((st.excludeCompanies || []).map(c => String(c).toLowerCase().replace(/[^a-z0-9]/g, '')));\nconst exKeys = new Set((st.excludedLeadKeys || []).map(k => String(k).toLowerCase()));\nconst scored = searchResp.results.map((r, i) => {\n  const p = r.person || r;\n  const c = r.company || {};\n  const cInd = String(c.industry || '').toLowerCase().trim();\n  const cNameLow = String(c.name || '').toLowerCase();\n  const cDescLow = `${c.description_ai || ''} ${c.description_seo || ''} ${c.description || ''} ${(c.keywords || []).join(' ')}`.toLowerCase();\n  const hay = `${cNameLow} ${cInd} ${cDescLow} ${p.headline || ''} ${p.current_job_title || ''}`.toLowerCase();\n\n  let rejected = false;\n  if (cInd && mustExInd.has(cInd)) rejected = true;\n  const nameHasCore = coreRoots.length > 0 && coreRoots.some(rt => rt && cNameLow.includes(rt));\n  if (!nameHasCore && mustExTerms.length > 0 && mustExTerms.some(bad => bad && cDescLow.includes(bad))) {\n    rejected = true;\n  }\n  if (mustMatch.length > 0 && !mustMatch.some(mk => mk && (cNameLow.includes(mk) || cDescLow.includes(mk) || cInd.includes(mk)))) {\n    rejected = true;\n  }\n\n  let sc = 0;\n  if (nameHasCore) sc += 8;\n  for (const kw of kws) { if (kw && hay.includes(kw)) sc += 3; }\n  for (const mk of mustMatch) { if (mk && (cNameLow.includes(mk) || cDescLow.includes(mk))) sc += 4; }\n  if (roleHint && String(p.current_job_title || '').toLowerCase().includes(roleHint)) sc += 4;\n  return { r, sc, i, rejected };\n}).filter(x => !x.rejected).sort((a, b) => (b.sc - a.sc) || (a.i - b.i));\n\nconst seenCo = new Set();\nconst items = [];\nconst maxPick = Math.min(5, st.needed || 5);\nfor (const { r, sc } of scored) {\n  if (items.length >= maxPick) break;\n  if (st.parsedCriteria?.strictIndustry && !st.parsedCriteria?.hasProspeoIndustryFilter && sc <= 0) continue;\n  const p = r.person || r;\n  const c = r.company || {};\n  const coName = String(c.name || '').trim();\n  const coNorm = coName.toLowerCase().replace(/[^a-z0-9]/g, '');\n  const nmNorm = String(p.full_name || '').toLowerCase().replace(/[^a-z0-9]/g, '');\n  const dom = String(c.domain || c.website || '').toLowerCase().replace(/^https?:\\/\\/(www\\.)?/, '').split('/')[0];\n  if (!p.person_id || !coName) continue;\n  if (exCos.has(coNorm) || seenCo.has(coNorm) || (dom && exKeys.has(dom)) || exKeys.has(`${dom}|${nmNorm}`)) continue;\n  seenCo.add(coNorm);\n  items.push({ json: { skipEnrich: false, person_id: p.person_id, fallbackCompany: coName } });\n}\nreturn items.length > 0 ? items : [{ json: { skipEnrich: true } }];\n"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000031",
+      "name": "4.1B · Prospeo #1 Enrich Verified",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -980,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ (!$json.skipEnrich && $env.PROSPEO_API_KEY_1 && $json.person_id) ? 'https://api.prospeo.io/enrich-person' : 'http://127.0.0.1:5678/healthz' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-KEY",
+              "value": "={{ $env.PROSPEO_API_KEY_1 ?? '' }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 35000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          },
+          "batching": {
+            "batch": {
+              "batchSize": 1,
+              "batchInterval": 1450
+            }
+          }
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ only_verified_email: true, data: { person_id: $json.person_id } }) }}"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000032",
+      "name": "4.1C · Check Prospeo #1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -860,
+        0
+      ],
+      "parameters": {
+        "jsCode": "\nfunction makeKey(lead) {\n  const dom = String(lead.domain || lead.officialWebsite || '').toLowerCase().replace(/^https?:\\/\\/(www\\.)?/, '').split('/')[0].trim();\n  const em = String(lead.email || '').toLowerCase().trim();\n  const nm = String(lead.decisionMakerName || '').toLowerCase().replace(/[^a-z0-9]/g, '');\n  const co = String(lead.companyName || '').toLowerCase().replace(/[^a-z0-9]/g, '');\n  return em || (dom && nm ? `${dom}|${nm}` : `${co}|${nm}`);\n}\nfunction mergeUniqueLeads(existing, candidates, excludedKeys, excludedCos, maxCap) {\n  const exKeySet = new Set((excludedKeys || []).map(k => String(k).toLowerCase()));\n  const exCoSet = new Set((excludedCos || []).map(c => String(c).toLowerCase().replace(/[^a-z0-9]/g, '')));\n  for (const item of existing) {\n    exKeySet.add(makeKey(item));\n    if (item.domain) exKeySet.add(item.domain.toLowerCase());\n  }\n  const out = [...existing];\n  for (const c of candidates) {\n    if (out.length >= maxCap) break;\n    if (!c.companyName || !c.decisionMakerName) continue;\n    const k = makeKey(c);\n    const coNorm = c.companyName.toLowerCase().replace(/[^a-z0-9]/g, '');\n    if (exKeySet.has(k) || (c.domain && exKeySet.has(c.domain.toLowerCase())) || (coNorm && exCoSet.has(coNorm))) {\n      continue;\n    }\n    exKeySet.add(k);\n    if (c.domain) exKeySet.add(c.domain.toLowerCase());\n    out.push({ ...c, leadKey: k });\n  }\n  return out;\n}\n\nconst prev = $('03 · Dual-Track Parallel Split Router').first().json;\nconst searchResp = $('4.1A · Prospeo #1 Search').first().json || {};\nconst enrichItems = $input.all().map(x => x.json || {});\nconst hasKey = Boolean(($env.PROSPEO_API_KEY_1 || '').trim());\n\nlet added = [];\nlet statusNote = 'skipped_no_api_key (0 credits)';\n\nif (hasKey) {\n  const validItems = enrichItems.filter(it => it && it.error === false && it.person);\n  if (validItems.length > 0) {\n    added = validItems.map(item => {\n      const p = item.person || {};\n      const c = item.company || p.company || {};\n      const emailObj = p.email || item.email || {};\n      const emailStr = typeof emailObj === 'string' ? emailObj : (emailObj.email || '');\n      const website = String(c.website || (c.domain ? `https://${c.domain}` : '') || '').trim();\n      const domain = String(c.domain || website).replace(/^https?:\\/\\/(www\\.)?/i, '').split('/')[0].toLowerCase();\n      const cLoc = (typeof c.location === 'object' && c.location) ? [c.location.city, c.location.state, c.location.country].filter(Boolean).join(', ') : '';\n      const pLoc = (typeof p.location === 'object' && p.location) ? [p.location.city, p.location.state, p.location.country].filter(Boolean).join(', ') : String(p.location || '');\n      return {\n        companyName: String(c.name || '').trim(),\n        officialWebsite: website,\n        domain,\n        companySummary: String(c.description_ai || c.description_seo || c.description || c.industry || '').slice(0, 220),\n        industry: String(c.industry || ''),\n        location: cLoc || pLoc,\n        decisionMakerName: String(p.full_name || `${p.first_name || ''} ${p.last_name || ''}`).trim(),\n        jobTitle: String(p.current_job_title || p.job_title || p.title || 'Decision Maker').trim(),\n        linkedinRaw: String(p.linkedin_url || '').trim(),\n        email: String(emailStr || '').toLowerCase().trim(),\n        emailVerified: Boolean(emailStr && String(emailStr).includes('@')),\n        verificationStatus: 'valid',\n        verifiedBy: 'prospeo_1_verified',\n        verificationSource: 'prospeo_1_verified',\n        sourceProvider: 'prospeo_acc_1'\n      };\n    }).filter(l => l.emailVerified && l.companyName);\n    statusNote = `called_prospeo_1 (searchFree=${Boolean(searchResp.free)}, verified=${added.length})`;\n  } else {\n    const errItem = enrichItems.find(it => it && it.error);\n    statusNote = searchResp.error ? `prospeo_1_search_err (${searchResp.error_code || 'err'})` : (errItem ? `prospeo_1_enrich_err (${errItem.error_code || 'err'})` : 'prospeo_1_0_verified');\n  }\n}\n\nconst merged = mergeUniqueLeads(prev.freeLeads, added, prev.excludedLeadKeys, prev.excludeCompanies, 5);\nconst skipFree = Boolean(prev.forceBackupRaceTest || prev.forceTinyFishPathway);\nreturn [{\n  json: {\n    ...prev,\n    freeLeads: merged,\n    needed: skipFree ? 0 : Math.max(0, 5 - merged.length),\n    providerTrace: [...prev.providerTrace, { provider: 'prospeo_acc_1', status: prev.forceTinyFishPathway ? 'bypassed_for_tinyfish_pathway (0 credits)' : (prev.forceBackupRaceTest ? 'bypassed_for_race_test (0 credits)' : statusNote), totalSoFar: merged.length }],\n    route: (skipFree || merged.length >= 5) ? 'ready' : 'continue'\n  }\n}];\n"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000033",
+      "name": "IF 4.1 · 5 Leads Found?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -660,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "version": 2,
+            "leftValue": "",
+            "rightValue": ""
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.route }}",
+              "rightValue": "ready",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000034",
+      "name": "4.2A · Prospeo #2 Search",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -440,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ ($env.PROSPEO_API_KEY_2 && $json.needed > 0 && !($json.skipProviders || []).includes('prospeo_2')) ? 'https://api.prospeo.io/search-person' : 'http://127.0.0.1:5678/healthz' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-KEY",
+              "value": "={{ $env.PROSPEO_API_KEY_2 ?? '' }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 30000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify(($json.freeLeads && $json.freeLeads.length > 0) ? $json.parsedCriteria.prospeoPayload2 : $json.parsedCriteria.prospeoPayload1) }}"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000097",
+      "name": "4.2P · Prospeo #2 Rate Guard (2s)",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -340,
+        0
+      ],
+      "parameters": {
+        "resume": "timeInterval",
+        "amount": 2,
+        "unit": "seconds"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000099",
+      "name": "4.2Q · Select Top ICP Candidates (#2)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -230,
+        0
+      ],
+      "parameters": {
+        "jsCode": "\nconst st = $('IF 4.1 · 5 Leads Found?').first().json;\nconst searchResp = $('4.2A · Prospeo #2 Search').first().json || {};\nconst hasKey = Boolean(($env.PROSPEO_API_KEY_2 || '').trim());\nif (!hasKey || st.needed <= 0 || !Array.isArray(searchResp.results) || searchResp.results.length === 0) {\n  return [{ json: { skipEnrich: true } }];\n}\nconst kws = (st.parsedCriteria?.industryKeywords || []);\nconst mustMatch = (st.parsedCriteria?.mustMatchKeywords || []);\nconst mustExInd = new Set((st.parsedCriteria?.excludeIndustries || []).map(x => String(x).toLowerCase()));\nconst mustExTerms = (st.parsedCriteria?.mustExcludeTerms || []);\nconst coreRoots = (st.parsedCriteria?.coreNicheRoots || []);\nconst roleHint = String(st.parsedCriteria?.primaryRoleHint || '').toLowerCase();\nconst exCos = new Set((st.excludeCompanies || []).map(c => String(c).toLowerCase().replace(/[^a-z0-9]/g, '')));\nconst exKeys = new Set((st.excludedLeadKeys || []).map(k => String(k).toLowerCase()));\nconst scored = searchResp.results.map((r, i) => {\n  const p = r.person || r;\n  const c = r.company || {};\n  const cInd = String(c.industry || '').toLowerCase().trim();\n  const cNameLow = String(c.name || '').toLowerCase();\n  const cDescLow = `${c.description_ai || ''} ${c.description_seo || ''} ${c.description || ''} ${(c.keywords || []).join(' ')}`.toLowerCase();\n  const hay = `${cNameLow} ${cInd} ${cDescLow} ${p.headline || ''} ${p.current_job_title || ''}`.toLowerCase();\n\n  let rejected = false;\n  if (cInd && mustExInd.has(cInd)) rejected = true;\n  const nameHasCore = coreRoots.length > 0 && coreRoots.some(rt => rt && cNameLow.includes(rt));\n  if (!nameHasCore && mustExTerms.length > 0 && mustExTerms.some(bad => bad && cDescLow.includes(bad))) {\n    rejected = true;\n  }\n  if (mustMatch.length > 0 && !mustMatch.some(mk => mk && (cNameLow.includes(mk) || cDescLow.includes(mk) || cInd.includes(mk)))) {\n    rejected = true;\n  }\n\n  let sc = 0;\n  if (nameHasCore) sc += 8;\n  for (const kw of kws) { if (kw && hay.includes(kw)) sc += 3; }\n  for (const mk of mustMatch) { if (mk && (cNameLow.includes(mk) || cDescLow.includes(mk))) sc += 4; }\n  if (roleHint && String(p.current_job_title || '').toLowerCase().includes(roleHint)) sc += 4;\n  return { r, sc, i, rejected };\n}).filter(x => !x.rejected).sort((a, b) => (b.sc - a.sc) || (a.i - b.i));\n\nconst seenCo = new Set((st.freeLeads || []).map(l => String(l.companyName || '').toLowerCase().replace(/[^a-z0-9]/g, '')));\nconst items = [];\nconst maxPick = Math.min(5, st.needed || 5);\nfor (const { r, sc } of scored) {\n  if (items.length >= maxPick) break;\n  if (st.parsedCriteria?.strictIndustry && !st.parsedCriteria?.hasProspeoIndustryFilter && sc <= 0) continue;\n  const p = r.person || r;\n  const c = r.company || {};\n  const coName = String(c.name || '').trim();\n  const coNorm = coName.toLowerCase().replace(/[^a-z0-9]/g, '');\n  const nmNorm = String(p.full_name || '').toLowerCase().replace(/[^a-z0-9]/g, '');\n  const dom = String(c.domain || c.website || '').toLowerCase().replace(/^https?:\\/\\/(www\\.)?/, '').split('/')[0];\n  if (!p.person_id || !coName) continue;\n  if (exCos.has(coNorm) || seenCo.has(coNorm) || (dom && exKeys.has(dom)) || exKeys.has(`${dom}|${nmNorm}`)) continue;\n  seenCo.add(coNorm);\n  items.push({ json: { skipEnrich: false, person_id: p.person_id, fallbackCompany: coName } });\n}\nreturn items.length > 0 ? items : [{ json: { skipEnrich: true } }];\n"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000035",
+      "name": "4.2B · Prospeo #2 Enrich Verified",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -110,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ (!$json.skipEnrich && $env.PROSPEO_API_KEY_2 && $json.person_id) ? 'https://api.prospeo.io/enrich-person' : 'http://127.0.0.1:5678/healthz' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-KEY",
+              "value": "={{ $env.PROSPEO_API_KEY_2 ?? '' }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 35000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          },
+          "batching": {
+            "batch": {
+              "batchSize": 1,
+              "batchInterval": 1450
+            }
+          }
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ only_verified_email: true, data: { person_id: $json.person_id } }) }}"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000036",
+      "name": "4.2C · Check Prospeo #2",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        10,
+        0
+      ],
+      "parameters": {
+        "jsCode": "\nfunction makeKey(lead) {\n  const dom = String(lead.domain || lead.officialWebsite || '').toLowerCase().replace(/^https?:\\/\\/(www\\.)?/, '').split('/')[0].trim();\n  const em = String(lead.email || '').toLowerCase().trim();\n  const nm = String(lead.decisionMakerName || '').toLowerCase().replace(/[^a-z0-9]/g, '');\n  const co = String(lead.companyName || '').toLowerCase().replace(/[^a-z0-9]/g, '');\n  return em || (dom && nm ? `${dom}|${nm}` : `${co}|${nm}`);\n}\nfunction mergeUniqueLeads(existing, candidates, excludedKeys, excludedCos, maxCap) {\n  const exKeySet = new Set((excludedKeys || []).map(k => String(k).toLowerCase()));\n  const exCoSet = new Set((excludedCos || []).map(c => String(c).toLowerCase().replace(/[^a-z0-9]/g, '')));\n  for (const item of existing) {\n    exKeySet.add(makeKey(item));\n    if (item.domain) exKeySet.add(item.domain.toLowerCase());\n  }\n  const out = [...existing];\n  for (const c of candidates) {\n    if (out.length >= maxCap) break;\n    if (!c.companyName || !c.decisionMakerName) continue;\n    const k = makeKey(c);\n    const coNorm = c.companyName.toLowerCase().replace(/[^a-z0-9]/g, '');\n    if (exKeySet.has(k) || (c.domain && exKeySet.has(c.domain.toLowerCase())) || (coNorm && exCoSet.has(coNorm))) {\n      continue;\n    }\n    exKeySet.add(k);\n    if (c.domain) exKeySet.add(c.domain.toLowerCase());\n    out.push({ ...c, leadKey: k });\n  }\n  return out;\n}\n\nconst prev = $('IF 4.1 · 5 Leads Found?').first().json;\nconst searchResp = $('4.2A · Prospeo #2 Search').first().json || {};\nconst enrichItems = $input.all().map(x => x.json || {});\nconst hasKey = Boolean(($env.PROSPEO_API_KEY_2 || '').trim());\n\nlet added = [];\nlet statusNote = 'skipped_no_api_key (0 credits)';\n\nif (hasKey) {\n  const validItems = enrichItems.filter(it => it && it.error === false && it.person);\n  if (validItems.length > 0) {\n    added = validItems.map(item => {\n      const p = item.person || {};\n      const c = item.company || p.company || {};\n      const emailObj = p.email || item.email || {};\n      const emailStr = typeof emailObj === 'string' ? emailObj : (emailObj.email || '');\n      const website = String(c.website || (c.domain ? `https://${c.domain}` : '') || '').trim();\n      const domain = String(c.domain || website).replace(/^https?:\\/\\/(www\\.)?/i, '').split('/')[0].toLowerCase();\n      const cLoc = (typeof c.location === 'object' && c.location) ? [c.location.city, c.location.state, c.location.country].filter(Boolean).join(', ') : '';\n      const pLoc = (typeof p.location === 'object' && p.location) ? [p.location.city, p.location.state, p.location.country].filter(Boolean).join(', ') : String(p.location || '');\n      return {\n        companyName: String(c.name || '').trim(),\n        officialWebsite: website,\n        domain,\n        companySummary: String(c.description_ai || c.description_seo || c.description || c.industry || '').slice(0, 220),\n        industry: String(c.industry || ''),\n        location: cLoc || pLoc,\n        decisionMakerName: String(p.full_name || `${p.first_name || ''} ${p.last_name || ''}`).trim(),\n        jobTitle: String(p.current_job_title || p.job_title || p.title || 'Decision Maker').trim(),\n        linkedinRaw: String(p.linkedin_url || '').trim(),\n        email: String(emailStr || '').toLowerCase().trim(),\n        emailVerified: Boolean(emailStr && String(emailStr).includes('@')),\n        verificationStatus: 'valid',\n        verifiedBy: 'prospeo_2_verified',\n        verificationSource: 'prospeo_2_verified',\n        sourceProvider: 'prospeo_acc_2'\n      };\n    }).filter(l => l.emailVerified && l.companyName);\n    statusNote = `called_prospeo_2 (searchFree=${Boolean(searchResp.free)}, verified=${added.length})`;\n  } else {\n    const errItem = enrichItems.find(it => it && it.error);\n    statusNote = searchResp.error ? `prospeo_2_search_err (${searchResp.error_code || 'err'})` : (errItem ? `prospeo_2_enrich_err (${errItem.error_code || 'err'})` : 'prospeo_2_0_verified');\n  }\n}\n\nconst merged = mergeUniqueLeads(prev.freeLeads, added, prev.excludedLeadKeys, prev.excludeCompanies, 5);\nreturn [{\n  json: {\n    ...prev,\n    freeLeads: merged,\n    needed: Math.max(0, 5 - merged.length),\n    providerTrace: [...prev.providerTrace, { provider: 'prospeo_acc_2', status: statusNote, totalSoFar: merged.length }],\n    route: merged.length >= 5 ? 'ready' : 'continue'\n  }\n}];\n"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000037",
+      "name": "IF 4.2 · 5 Leads Found?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        200,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "version": 2,
+            "leftValue": "",
+            "rightValue": ""
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.route }}",
+              "rightValue": "ready",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000130",
+      "name": "4.25A · Clay #1 Create Search",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        380,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ ($env.CLAY_API_KEY_1 && $json.needed > 0 && !($json.skipProviders || []).includes('clay_1')) ? 'https://api.clay.com/public/v0/search/query-mode' : 'http://127.0.0.1:5678/healthz' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "clay-api-key",
+              "value": "={{ $env.CLAY_API_KEY_1 ?? '' }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 45000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ query: $json.parsedCriteria.claySearchQuery }) }}"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000131",
+      "name": "4.25B · Clay #1 Run People Search",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        530,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ ($env.CLAY_API_KEY_1 && $json.search_id) ? ('https://api.clay.com/public/v0/search/query-mode/' + encodeURIComponent($json.search_id) + '/run') : 'http://127.0.0.1:5678/healthz' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "clay-api-key",
+              "value": "={{ $env.CLAY_API_KEY_1 ?? '' }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 60000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ limit: 18 }) }}"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000132",
+      "name": "4.25Q · Filter Clay #1 Pure Candidates",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        680,
+        0
+      ],
+      "parameters": {
+        "jsCode": "\nconst st = $('IF 4.2 · 5 Leads Found?').first().json;\nconst createResp = $('4.25A · Clay #1 Create Search').first().json || {};\nconst runResp = $input.first().json || {};\nconst hasKey = Boolean(($env.CLAY_API_KEY_1 || '').trim());\nif (!hasKey || st.needed <= 0 || !Array.isArray(runResp.data) || runResp.data.length === 0) {\n  return [{ json: { skipClayVerify: true, clayCandidates: [], clayNeeded: 0, clayError: createResp.message || runResp.message || '' } }];\n}\nconst domMap = (st.parsedCriteria && st.parsedCriteria.websiteByCompanyNorm) || {};\nconst mustExTerms = (st.parsedCriteria && st.parsedCriteria.mustExcludeTerms) || [];\nconst exCos = new Set([\n  ...(st.excludeCompanies || []),\n  ...((st.freeLeads || []).map(l => l.companyName))\n].map(c => String(c || '').toLowerCase().replace(/[^a-z0-9]/g, '')).filter(Boolean));\n\nconst seenCo = new Set();\nconst cands = [];\nfor (const p of runResp.data) {\n  if (cands.length >= Math.min(12, (st.needed || 5) + 7)) break;\n  const exp = (Array.isArray(p.matched_experiences) && p.matched_experiences[0]) || {};\n  const coName = String(exp.company || '').trim();\n  const fullName = String(p.name || `${p.first_name || ''} ${p.last_name || ''}`).trim();\n  const coNorm = coName.toLowerCase().replace(/[^a-z0-9]/g, '');\n  if (!coName || !fullName || !coNorm || exCos.has(coNorm) || seenCo.has(coNorm)) continue;\n  if (mustExTerms.length > 0 && mustExTerms.some(bad => bad && coName.toLowerCase().includes(bad))) continue;\n  seenCo.add(coNorm);\n  const knownDom = domMap[coNorm] || '';\n  const locObj = p.location || {};\n  const locStr = String(locObj.name || [locObj.city, locObj.state_or_province].filter(Boolean).join(', ') || exp.location || '').trim();\n  cands.push({\n    companyName: coName,\n    domain: knownDom,\n    officialWebsite: knownDom ? `https://${knownDom}` : '',\n    companySummary: `${coName} — ${String(exp.title || 'Decision Maker').trim()}`,\n    industry: (st.parsedCriteria && st.parsedCriteria.industries && st.parsedCriteria.industries[0]) || '',\n    location: locStr,\n    decisionMakerName: fullName,\n    jobTitle: String(exp.title || 'Decision Maker').trim(),\n    linkedinRaw: String(p.linkedin_url || '').trim(),\n    sourceProvider: 'clay_acc_1'\n  });\n}\nreturn [{ json: { skipClayVerify: cands.length === 0, clayCandidates: cands, clayNeeded: Math.min(5, st.needed || 5), clayError: '' } }];\n"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000133",
+      "name": "4.25E · Clay #1 Email Resolver & Verifier",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        830,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ (!$json.skipClayVerify && $json.clayCandidates && $json.clayCandidates.length > 0) ? 'http://172.18.0.1:8097/mailmeteor/verify-leads' : 'http://127.0.0.1:5678/healthz' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 75000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ leads: $json.clayCandidates || [], needed: $json.clayNeeded || 5, enableSmartGuesser: true, perLeadTimeoutSec: 7.5, maxTotalGuessSec: 18.0, sourceProvider: 'clay_acc_1' }) }}"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000134",
+      "name": "4.25C · Check Clay #1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        980,
+        0
+      ],
+      "parameters": {
+        "jsCode": "\nfunction makeKey(lead) {\n  const dom = String(lead.domain || lead.officialWebsite || '').toLowerCase().replace(/^https?:\\/\\/(www\\.)?/, '').split('/')[0].trim();\n  const em = String(lead.email || '').toLowerCase().trim();\n  const nm = String(lead.decisionMakerName || '').toLowerCase().replace(/[^a-z0-9]/g, '');\n  const co = String(lead.companyName || '').toLowerCase().replace(/[^a-z0-9]/g, '');\n  return em || (dom && nm ? `${dom}|${nm}` : `${co}|${nm}`);\n}\nfunction mergeUniqueLeads(existing, candidates, excludedKeys, excludedCos, maxCap) {\n  const exKeySet = new Set((excludedKeys || []).map(k => String(k).toLowerCase()));\n  const exCoSet = new Set((excludedCos || []).map(c => String(c).toLowerCase().replace(/[^a-z0-9]/g, '')));\n  for (const item of existing) {\n    exKeySet.add(makeKey(item));\n    if (item.domain) exKeySet.add(item.domain.toLowerCase());\n  }\n  const out = [...existing];\n  for (const c of candidates) {\n    if (out.length >= maxCap) break;\n    if (!c.companyName || !c.decisionMakerName) continue;\n    const k = makeKey(c);\n    const coNorm = c.companyName.toLowerCase().replace(/[^a-z0-9]/g, '');\n    if (exKeySet.has(k) || (c.domain && exKeySet.has(c.domain.toLowerCase())) || (coNorm && exCoSet.has(coNorm))) {\n      continue;\n    }\n    exKeySet.add(k);\n    if (c.domain) exKeySet.add(c.domain.toLowerCase());\n    out.push({ ...c, leadKey: k });\n  }\n  return out;\n}\n\nconst prev = $('IF 4.2 · 5 Leads Found?').first().json;\nconst createResp = $('4.25A · Clay #1 Create Search').first().json || {};\nconst prep = $('4.25Q · Filter Clay #1 Pure Candidates').first().json || {};\nconst verResp = $input.first().json || {};\nconst hasKey = Boolean(($env.CLAY_API_KEY_1 || '').trim());\n\nlet added = [];\nlet statusNote = 'skipped_no_api_key (0 credits)';\n\nif (hasKey && prev.needed > 0) {\n  const vList = Array.isArray(verResp.verifiedLeads) ? verResp.verifiedLeads : [];\n  if (vList.length > 0) {\n    added = vList.map(l => ({\n      ...l,\n      emailVerified: true,\n      verificationStatus: l.mailmeteorStatus === 'valid' ? 'valid' : 'accept_all',\n      verifiedBy: l.verificationSource || 'clay_1_verified',\n      sourceProvider: 'clay_acc_1'\n    }));\n    statusNote = `called_clay_1 (candidates=${(prep.clayCandidates || []).length}, verified=${added.length})`;\n  } else {\n    statusNote = createResp.message ? `clay_1_err (${createResp.message})` : `clay_1_0_verified`;\n  }\n}\n\nconst merged = mergeUniqueLeads(prev.freeLeads || [], added, prev.excludedLeadKeys, prev.excludeCompanies, 5);\nreturn [{\n  json: {\n    ...prev,\n    freeLeads: merged,\n    needed: Math.max(0, 5 - merged.length),\n    providerTrace: [...(prev.providerTrace || []), { provider: 'clay_acc_1', status: statusNote, totalSoFar: merged.length }],\n    route: merged.length >= 5 ? 'ready' : 'continue'\n  }\n}];\n"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000135",
+      "name": "IF 4.25 · 5 Leads Found?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1130,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "version": 2,
+            "leftValue": "",
+            "rightValue": ""
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.route }}",
+              "rightValue": "ready",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000136",
+      "name": "4.26A · Clay #2 Create Search",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1290,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ ($env.CLAY_API_KEY_2 && $json.needed > 0 && !($json.skipProviders || []).includes('clay_2')) ? 'https://api.clay.com/public/v0/search/query-mode' : 'http://127.0.0.1:5678/healthz' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "clay-api-key",
+              "value": "={{ $env.CLAY_API_KEY_2 ?? '' }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 45000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ query: $json.parsedCriteria.claySearchQuery }) }}"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000137",
+      "name": "4.26B · Clay #2 Run People Search",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1440,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ ($env.CLAY_API_KEY_2 && $json.search_id) ? ('https://api.clay.com/public/v0/search/query-mode/' + encodeURIComponent($json.search_id) + '/run') : 'http://127.0.0.1:5678/healthz' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "clay-api-key",
+              "value": "={{ $env.CLAY_API_KEY_2 ?? '' }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 60000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ limit: 18 }) }}"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000138",
+      "name": "4.26Q · Filter Clay #2 Pure Candidates",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1590,
+        0
+      ],
+      "parameters": {
+        "jsCode": "\nconst st = $('IF 4.25 · 5 Leads Found?').first().json;\nconst createResp = $('4.26A · Clay #2 Create Search').first().json || {};\nconst runResp = $input.first().json || {};\nconst hasKey = Boolean(($env.CLAY_API_KEY_2 || '').trim());\nif (!hasKey || st.needed <= 0 || !Array.isArray(runResp.data) || runResp.data.length === 0) {\n  return [{ json: { skipClayVerify: true, clayCandidates: [], clayNeeded: 0, clayError: createResp.message || runResp.message || '' } }];\n}\nconst domMap = (st.parsedCriteria && st.parsedCriteria.websiteByCompanyNorm) || {};\nconst mustExTerms = (st.parsedCriteria && st.parsedCriteria.mustExcludeTerms) || [];\nconst exCos = new Set([\n  ...(st.excludeCompanies || []),\n  ...((st.freeLeads || []).map(l => l.companyName))\n].map(c => String(c || '').toLowerCase().replace(/[^a-z0-9]/g, '')).filter(Boolean));\n\nconst seenCo = new Set();\nconst cands = [];\nfor (const p of runResp.data) {\n  if (cands.length >= Math.min(12, (st.needed || 5) + 7)) break;\n  const exp = (Array.isArray(p.matched_experiences) && p.matched_experiences[0]) || {};\n  const coName = String(exp.company || '').trim();\n  const fullName = String(p.name || `${p.first_name || ''} ${p.last_name || ''}`).trim();\n  const coNorm = coName.toLowerCase().replace(/[^a-z0-9]/g, '');\n  if (!coName || !fullName || !coNorm || exCos.has(coNorm) || seenCo.has(coNorm)) continue;\n  if (mustExTerms.length > 0 && mustExTerms.some(bad => bad && coName.toLowerCase().includes(bad))) continue;\n  seenCo.add(coNorm);\n  const knownDom = domMap[coNorm] || '';\n  const locObj = p.location || {};\n  const locStr = String(locObj.name || [locObj.city, locObj.state_or_province].filter(Boolean).join(', ') || exp.location || '').trim();\n  cands.push({\n    companyName: coName,\n    domain: knownDom,\n    officialWebsite: knownDom ? `https://${knownDom}` : '',\n    companySummary: `${coName} — ${String(exp.title || 'Decision Maker').trim()}`,\n    industry: (st.parsedCriteria && st.parsedCriteria.industries && st.parsedCriteria.industries[0]) || '',\n    location: locStr,\n    decisionMakerName: fullName,\n    jobTitle: String(exp.title || 'Decision Maker').trim(),\n    linkedinRaw: String(p.linkedin_url || '').trim(),\n    sourceProvider: 'clay_acc_2'\n  });\n}\nreturn [{ json: { skipClayVerify: cands.length === 0, clayCandidates: cands, clayNeeded: Math.min(5, st.needed || 5), clayError: '' } }];\n"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000139",
+      "name": "4.26E · Clay #2 Email Resolver & Verifier",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1740,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ (!$json.skipClayVerify && $json.clayCandidates && $json.clayCandidates.length > 0) ? 'http://172.18.0.1:8097/mailmeteor/verify-leads' : 'http://127.0.0.1:5678/healthz' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 75000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ leads: $json.clayCandidates || [], needed: $json.clayNeeded || 5, enableSmartGuesser: true, perLeadTimeoutSec: 7.5, maxTotalGuessSec: 18.0, sourceProvider: 'clay_acc_2' }) }}"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000140",
+      "name": "4.26C · Check Clay #2",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1890,
+        0
+      ],
+      "parameters": {
+        "jsCode": "\nfunction makeKey(lead) {\n  const dom = String(lead.domain || lead.officialWebsite || '').toLowerCase().replace(/^https?:\\/\\/(www\\.)?/, '').split('/')[0].trim();\n  const em = String(lead.email || '').toLowerCase().trim();\n  const nm = String(lead.decisionMakerName || '').toLowerCase().replace(/[^a-z0-9]/g, '');\n  const co = String(lead.companyName || '').toLowerCase().replace(/[^a-z0-9]/g, '');\n  return em || (dom && nm ? `${dom}|${nm}` : `${co}|${nm}`);\n}\nfunction mergeUniqueLeads(existing, candidates, excludedKeys, excludedCos, maxCap) {\n  const exKeySet = new Set((excludedKeys || []).map(k => String(k).toLowerCase()));\n  const exCoSet = new Set((excludedCos || []).map(c => String(c).toLowerCase().replace(/[^a-z0-9]/g, '')));\n  for (const item of existing) {\n    exKeySet.add(makeKey(item));\n    if (item.domain) exKeySet.add(item.domain.toLowerCase());\n  }\n  const out = [...existing];\n  for (const c of candidates) {\n    if (out.length >= maxCap) break;\n    if (!c.companyName || !c.decisionMakerName) continue;\n    const k = makeKey(c);\n    const coNorm = c.companyName.toLowerCase().replace(/[^a-z0-9]/g, '');\n    if (exKeySet.has(k) || (c.domain && exKeySet.has(c.domain.toLowerCase())) || (coNorm && exCoSet.has(coNorm))) {\n      continue;\n    }\n    exKeySet.add(k);\n    if (c.domain) exKeySet.add(c.domain.toLowerCase());\n    out.push({ ...c, leadKey: k });\n  }\n  return out;\n}\n\nconst prev = $('IF 4.25 · 5 Leads Found?').first().json;\nconst createResp = $('4.26A · Clay #2 Create Search').first().json || {};\nconst prep = $('4.26Q · Filter Clay #2 Pure Candidates').first().json || {};\nconst verResp = $input.first().json || {};\nconst hasKey = Boolean(($env.CLAY_API_KEY_2 || '').trim());\n\nlet added = [];\nlet statusNote = 'skipped_no_api_key (0 credits)';\n\nif (hasKey && prev.needed > 0) {\n  const vList = Array.isArray(verResp.verifiedLeads) ? verResp.verifiedLeads : [];\n  if (vList.length > 0) {\n    added = vList.map(l => ({\n      ...l,\n      emailVerified: true,\n      verificationStatus: l.mailmeteorStatus === 'valid' ? 'valid' : 'accept_all',\n      verifiedBy: l.verificationSource || 'clay_2_verified',\n      sourceProvider: 'clay_acc_2'\n    }));\n    statusNote = `called_clay_2 (candidates=${(prep.clayCandidates || []).length}, verified=${added.length})`;\n  } else {\n    statusNote = createResp.message ? `clay_2_err (${createResp.message})` : `clay_2_0_verified`;\n  }\n}\n\nconst merged = mergeUniqueLeads(prev.freeLeads || [], added, prev.excludedLeadKeys, prev.excludeCompanies, 5);\nreturn [{\n  json: {\n    ...prev,\n    freeLeads: merged,\n    needed: Math.max(0, 5 - merged.length),\n    providerTrace: [...(prev.providerTrace || []), { provider: 'clay_acc_2', status: statusNote, totalSoFar: merged.length }],\n    route: merged.length >= 5 ? 'ready' : 'continue'\n  }\n}];\n"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000141",
+      "name": "IF 4.26 · 5 Leads Found?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2040,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "version": 2,
+            "leftValue": "",
+            "rightValue": ""
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.route }}",
+              "rightValue": "ready",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000038",
+      "name": "4.3A · Hunter Free Discover",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2200,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ ($env.HUNTER_API_KEY && $json.needed > 0 && !($json.skipProviders || []).includes('hunter')) ? ('https://api.hunter.io/v2/discover?api_key=' + encodeURIComponent($env.HUNTER_API_KEY)) : 'http://127.0.0.1:5678/healthz' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 30000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ query: $json.prompt, limit: 10 }) }}"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000142",
+      "name": "4.3Q · Select Top Hunter Domains",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2340,
+        0
+      ],
+      "parameters": {
+        "jsCode": "\nconst st = $('IF 4.26 · 5 Leads Found?').first().json;\nconst discResp = $input.first().json || {};\nconst hasKey = Boolean(($env.HUNTER_API_KEY || '').trim());\nif (!hasKey || st.needed <= 0 || (st.skipProviders || []).includes('hunter')) {\n  return [{ json: { skipHunterDomain: true, domain: '' } }];\n}\nconst exCos = new Set([\n  ...(st.excludeCompanies || []),\n  ...((st.freeLeads || []).map(l => l.companyName))\n].map(c => String(c || '').toLowerCase().replace(/[^a-z0-9]/g, '')).filter(Boolean));\nconst exDoms = new Set([\n  ...(st.excludedLeadKeys || []),\n  ...((st.freeLeads || []).map(l => l.domain))\n].map(d => String(d || '').toLowerCase().trim()).filter(Boolean));\n\nconst seenDom = new Set();\nconst out = [];\nconst maxDomains = Math.min(6, (st.needed || 5) + 1);\n\nconst pushCand = (domRaw, orgRaw) => {\n  if (out.length >= maxDomains) return;\n  const dom = String(domRaw || '').toLowerCase().replace(/^https?:\\/\\/(www\\.)?/, '').split('/')[0].trim();\n  const orgNorm = String(orgRaw || '').toLowerCase().replace(/[^a-z0-9]/g, '');\n  if (!dom || !dom.includes('.') || seenDom.has(dom) || exDoms.has(dom)) return;\n  if (orgNorm && exCos.has(orgNorm)) return;\n  seenDom.add(dom);\n  out.push({ json: { skipHunterDomain: false, domain: dom, fallbackOrg: String(orgRaw || '').trim() } });\n};\n\nfor (const item of (Array.isArray(discResp.data) ? discResp.data : [])) {\n  pushCand(item.domain, item.organization || item.domain);\n}\nconst tw = (st.parsedCriteria && st.parsedCriteria.targetWebsites) || [];\nconst tn = (st.parsedCriteria && st.parsedCriteria.targetCompanyNames) || [];\nfor (let i = 0; i < tw.length && out.length < maxDomains; i++) {\n  pushCand(tw[i], tn[i] || tw[i]);\n}\n\nif (out.length === 0) {\n  return [{ json: { skipHunterDomain: true, domain: '' } }];\n}\nreturn out;\n"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000039",
+      "name": "4.3B · Hunter Domain Finder",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2480,
+        0
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{ ($env.HUNTER_API_KEY && !$json.skipHunterDomain && $json.domain) ? ('https://api.hunter.io/v2/domain-search?domain=' + encodeURIComponent($json.domain) + '&type=personal&limit=5&api_key=' + encodeURIComponent($env.HUNTER_API_KEY)) : 'http://127.0.0.1:5678/healthz' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 30000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          },
+          "batching": {
+            "batch": {
+              "batchSize": 1,
+              "batchInterval": 300
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000040",
+      "name": "4.3C · Check Hunter.io",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2620,
+        0
+      ],
+      "parameters": {
+        "jsCode": "\nfunction makeKey(lead) {\n  const dom = String(lead.domain || lead.officialWebsite || '').toLowerCase().replace(/^https?:\\/\\/(www\\.)?/, '').split('/')[0].trim();\n  const em = String(lead.email || '').toLowerCase().trim();\n  const nm = String(lead.decisionMakerName || '').toLowerCase().replace(/[^a-z0-9]/g, '');\n  const co = String(lead.companyName || '').toLowerCase().replace(/[^a-z0-9]/g, '');\n  return em || (dom && nm ? `${dom}|${nm}` : `${co}|${nm}`);\n}\nfunction mergeUniqueLeads(existing, candidates, excludedKeys, excludedCos, maxCap) {\n  const exKeySet = new Set((excludedKeys || []).map(k => String(k).toLowerCase()));\n  const exCoSet = new Set((excludedCos || []).map(c => String(c).toLowerCase().replace(/[^a-z0-9]/g, '')));\n  for (const item of existing) {\n    exKeySet.add(makeKey(item));\n    if (item.domain) exKeySet.add(item.domain.toLowerCase());\n  }\n  const out = [...existing];\n  for (const c of candidates) {\n    if (out.length >= maxCap) break;\n    if (!c.companyName || !c.decisionMakerName) continue;\n    const k = makeKey(c);\n    const coNorm = c.companyName.toLowerCase().replace(/[^a-z0-9]/g, '');\n    if (exKeySet.has(k) || (c.domain && exKeySet.has(c.domain.toLowerCase())) || (coNorm && exCoSet.has(coNorm))) {\n      continue;\n    }\n    exKeySet.add(k);\n    if (c.domain) exKeySet.add(c.domain.toLowerCase());\n    out.push({ ...c, leadKey: k });\n  }\n  return out;\n}\n\nconst prev = $('IF 4.26 · 5 Leads Found?').first().json;\nconst discResp = $('4.3A · Hunter Free Discover').first().json || {};\nconst domItems = $input.all().map(x => x.json || {});\nconst hasKey = Boolean(($env.HUNTER_API_KEY || '').trim());\n\nlet added = [];\nlet statusNote = 'skipped_no_api_key (0 credits)';\n\nif ((prev.skipProviders || []).includes('hunter')) {\n  statusNote = 'skipped_test_override';\n} else if (hasKey && prev.needed > 0) {\n  const execRx = /\\b(founder|co-founder|ceo|chief|managing director|director|owner|president|partner|vp|vice president|head)\\b/i;\n  for (const domResp of domItems) {\n    const dData = domResp.data || {};\n    const emails = Array.isArray(dData.emails) ? dData.emails : [];\n    const org = String(dData.organization || dData.domain || '').trim();\n    const domain = String(dData.domain || '').toLowerCase().trim();\n    if (!domain || emails.length === 0) continue;\n    // Rank personal executive emails first, then highest confidence\n    const ranked = [...emails].sort((a, b) => {\n      const aExec = execRx.test(`${a.position || ''} ${a.seniority || ''}`) ? 1 : 0;\n      const bExec = execRx.test(`${b.position || ''} ${b.seniority || ''}`) ? 1 : 0;\n      if (bExec !== aExec) return bExec - aExec;\n      const aNamed = (a.first_name || a.last_name) ? 1 : 0;\n      const bNamed = (b.first_name || b.last_name) ? 1 : 0;\n      if (bNamed !== aNamed) return bNamed - aNamed;\n      return (b.confidence || 0) - (a.confidence || 0);\n    });\n    const best = ranked[0];\n    if (best && best.value) {\n      added.push({\n        companyName: org || domain,\n        officialWebsite: domain ? `https://${domain}` : '',\n        domain,\n        companySummary: String(dData.description || dData.industry || '').slice(0, 200),\n        industry: String(dData.industry || ''),\n        location: String([dData.city, dData.state, dData.country].filter(Boolean).join(', ') || ''),\n        decisionMakerName: `${best.first_name || ''} ${best.last_name || ''}`.trim() || 'Executive Contact',\n        jobTitle: String(best.position || best.seniority || 'Decision Maker').trim(),\n        linkedinRaw: String(best.linkedin || '').trim(),\n        email: String(best.value || '').toLowerCase().trim(),\n        verificationStatus: best.verification?.status === 'valid' ? 'valid' : ((best.confidence || 0) >= 80 ? 'valid' : 'accept_all'),\n        verifiedBy: 'hunter_finder_included',\n        sourceProvider: 'hunter_api'\n      });\n    }\n  }\n  if (added.length > 0) {\n    statusNote = `called_hunter (domains=${domItems.length}, found=${added.length})`;\n  } else {\n    statusNote = discResp.errors ? `hunter_error` : 'hunter_0_matches';\n  }\n}\n\nconst merged = mergeUniqueLeads(prev.freeLeads || [], added, prev.excludedLeadKeys, prev.excludeCompanies, prev.maxLeads);\nconst needed = Math.max(0, prev.maxLeads - merged.length);\n\nreturn [{\n  json: {\n    ...prev,\n    freeLeads: merged,\n    needed,\n    providerTrace: [...(prev.providerTrace || []), { provider: 'hunter_api', status: statusNote, totalSoFar: merged.length }],\n    route: merged.length >= prev.maxLeads ? 'ready' : 'need_more'\n  }\n}];\n"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000041",
+      "name": "IF 4.3 · 5 Leads Found?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2760,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "version": 2,
+            "leftValue": "",
+            "rightValue": ""
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.route }}",
+              "rightValue": "ready",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000042",
+      "name": "4.4A · Apollo People Search",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2960,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ ($env.APOLLO_API_KEY && $json.needed > 0 && !($json.skipProviders || []).includes('apollo')) ? 'https://api.apollo.io/api/v1/mixed_people/search' : 'http://127.0.0.1:5678/healthz' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "value": "={{ $env.APOLLO_API_KEY ?? '' }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 15000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ page: $json.batchNumber || 1, per_page: Math.min(5, $json.needed || 5), person_titles: $json.parsedCriteria.roles, ...( $json.parsedCriteria.location ? { person_locations: [$json.parsedCriteria.location] } : {} ), q_keywords: $json.prompt.slice(0, 120) }) }}"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000043",
+      "name": "4.4B · Check Apollo.io",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3140,
+        0
+      ],
+      "parameters": {
+        "jsCode": "\nfunction makeKey(lead) {\n  const dom = String(lead.domain || lead.officialWebsite || '').toLowerCase().replace(/^https?:\\/\\/(www\\.)?/, '').split('/')[0].trim();\n  const em = String(lead.email || '').toLowerCase().trim();\n  const nm = String(lead.decisionMakerName || '').toLowerCase().replace(/[^a-z0-9]/g, '');\n  const co = String(lead.companyName || '').toLowerCase().replace(/[^a-z0-9]/g, '');\n  return em || (dom && nm ? `${dom}|${nm}` : `${co}|${nm}`);\n}\nfunction mergeUniqueLeads(existing, candidates, excludedKeys, excludedCos, maxCap) {\n  const exKeySet = new Set((excludedKeys || []).map(k => String(k).toLowerCase()));\n  const exCoSet = new Set((excludedCos || []).map(c => String(c).toLowerCase().replace(/[^a-z0-9]/g, '')));\n  for (const item of existing) {\n    exKeySet.add(makeKey(item));\n    if (item.domain) exKeySet.add(item.domain.toLowerCase());\n  }\n  const out = [...existing];\n  for (const c of candidates) {\n    if (out.length >= maxCap) break;\n    if (!c.companyName || !c.decisionMakerName) continue;\n    const k = makeKey(c);\n    const coNorm = c.companyName.toLowerCase().replace(/[^a-z0-9]/g, '');\n    if (exKeySet.has(k) || (c.domain && exKeySet.has(c.domain.toLowerCase())) || (coNorm && exCoSet.has(coNorm))) {\n      continue;\n    }\n    exKeySet.add(k);\n    if (c.domain) exKeySet.add(c.domain.toLowerCase());\n    out.push({ ...c, leadKey: k });\n  }\n  return out;\n}\n\nconst prev = $('IF 4.3 · 5 Leads Found?').first().json;\nconst apResp = $input.first().json || {};\nconst hasKey = Boolean(($env.APOLLO_API_KEY || '').trim());\n\nlet added = [];\nlet statusNote = 'skipped_no_api_key (0 credits)';\n\nif (hasKey && prev.needed > 0) {\n  const people = Array.isArray(apResp.people) ? apResp.people : (Array.isArray(apResp.contacts) ? apResp.contacts : []);\n  if (people.length > 0) {\n    added = people.map(p => {\n      const org = p.organization || {};\n      const website = String(org.website_url || '').trim();\n      const domain = String(org.primary_domain || website.replace(/^https?:\\/\\/(www\\.)?/i, '').split('/')[0] || '').toLowerCase();\n      const email = String(p.email || '').toLowerCase().trim();\n      const validEmail = (email && !email.includes('email_not_unlocked')) ? email : '';\n      return {\n        companyName: String(org.name || p.organization_name || '').trim(),\n        officialWebsite: website || (domain ? `https://${domain}` : ''),\n        domain,\n        companySummary: String(org.short_description || org.industry || '').slice(0, 200),\n        industry: String(org.industry || ''),\n        location: [p.city, p.country].filter(Boolean).join(', '),\n        decisionMakerName: String(p.name || `${p.first_name || ''} ${p.last_name || ''}`).trim(),\n        jobTitle: String(p.title || 'Decision Maker').trim(),\n        linkedinRaw: String(p.linkedin_url || '').trim(),\n        email: validEmail,\n        verificationStatus: validEmail ? (p.email_status === 'verified' ? 'valid' : 'accept_all') : 'missing',\n        verifiedBy: 'apollo_api',\n        sourceProvider: 'apollo_api'\n      };\n    }).filter(x => x.email && x.companyName);\n    statusNote = `called_apollo (found ${added.length})`;\n  } else {\n    statusNote = apResp.error_code === 'API_INACCESSIBLE' ? 'apollo_free_plan_search_restricted (0 credits)' : (apResp.error ? 'apollo_error' : 'apollo_0_matches');\n  }\n}\n\nconst merged = mergeUniqueLeads(prev.freeLeads || [], added, prev.excludedLeadKeys, prev.excludeCompanies, prev.maxLeads);\nconst needed = Math.max(0, prev.maxLeads - merged.length);\n\nreturn [{\n  json: {\n    ...prev,\n    freeLeads: merged,\n    needed,\n    providerTrace: [...(prev.providerTrace || []), { provider: 'apollo_api', status: statusNote, totalSoFar: merged.length }],\n    route: merged.length >= prev.maxLeads ? 'ready' : 'need_more'\n  }\n}];\n"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000044",
+      "name": "IF 4.4 · 5 Leads Found?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        3320,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "version": 2,
+            "leftValue": "",
+            "rightValue": ""
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.route }}",
+              "rightValue": "ready",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000045",
+      "name": "+4.5 · Future Free Lead API Slot",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3520,
+        0
+      ],
+      "parameters": {
+        "jsCode": "\n// +4.5 EXPANDABLE WATERFALL SLOT:\n// Future Free Lead APIs (e.g., Snov.io, RocketReach, Dropcontact) can be inserted right here!\nconst prev = $input.first().json;\nreturn [{\n  json: {\n    ...prev,\n    track: 'free_chain',\n    bypassUsed: false\n  }\n}];\n"
+      },
+      "notes": "Expandable Branch: Plug Snov.io / RocketReach here",
+      "notesInFlow": true
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000046",
+      "name": "Green Express Bypass Rail (Skip Unused APIs)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3520,
+        260
+      ],
+      "parameters": {
+        "jsCode": "\n// GREEN EXPRESS BYPASS RAIL:\n// Triggered immediately as soon as ANY provider in Stage 04 reaches 5 unique leads!\n// Skips all remaining downstream lead providers to save API credits.\nconst prev = $input.first().json;\nreturn [{\n  json: {\n    ...prev,\n    track: 'free_chain',\n    bypassUsed: true\n  }\n}];\n"
+      },
+      "notes": "Saves credits by skipping remaining APIs",
+      "notesInFlow": true
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000050",
+      "name": "Sync · Free Chain + Parallel Race Winner",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        3800,
+        -140
+      ],
+      "parameters": {
+        "mode": "append",
+        "numberInputs": 2,
+        "options": {}
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000051",
+      "name": "05 · Evaluate Free Chain Sufficiency",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4000,
+        -140
+      ],
+      "parameters": {
+        "jsCode": "\nconst items = $input.all().map(i => i.json);\nconst freeItem = items.find(x => Array.isArray(x.freeLeads)) || items[0] || {};\nconst backupItem = items.find(x => x.track === 'parallel_backup_race') || {};\n\nconst freeLeads = Array.isArray(freeItem.freeLeads) ? freeItem.freeLeads : [];\nconst backupLeads = Array.isArray(backupItem.backupLeads) ? backupItem.backupLeads : [];\nconst maxLeads = freeItem.maxLeads || 5;\n\nconst isSufficient = (!freeItem.forceBackupRaceTest && !freeItem.forceTinyFishPathway) && (freeLeads.length >= maxLeads);\n\nreturn [{\n  json: {\n    ...freeItem,\n    backupLeads,\n    raceWinner: backupItem.raceWinner || 'none',\n    raceElapsedMs: backupItem.raceElapsedMs || 0,\n    leadpulseStatus: backupItem.leadpulseStatus || 'unknown',\n    sufficiency: isSufficient ? 'sufficient' : 'use_race_winner_mailmeteor'\n  }\n}];\n"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000052",
+      "name": "05 · Sufficiency Gate (5 Free Leads Ready?)",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        4200,
+        -140
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "version": 2,
+            "leftValue": "",
+            "rightValue": ""
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.sufficiency }}",
+              "rightValue": "sufficient",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000053",
+      "name": "5B · Send Race Winner to Mailmeteor",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4420,
+        -340
+      ],
+      "parameters": {
+        "jsCode": "\nfunction makeKey(lead) {\n  const dom = String(lead.domain || lead.officialWebsite || '').toLowerCase().replace(/^https?:\\/\\/(www\\.)?/, '').split('/')[0].trim();\n  const em = String(lead.email || '').toLowerCase().trim();\n  const nm = String(lead.decisionMakerName || '').toLowerCase().replace(/[^a-z0-9]/g, '');\n  const co = String(lead.companyName || '').toLowerCase().replace(/[^a-z0-9]/g, '');\n  return em || (dom && nm ? `${dom}|${nm}` : `${co}|${nm}`);\n}\nfunction mergeUniqueLeads(existing, candidates, excludedKeys, excludedCos, maxCap) {\n  const exKeySet = new Set((excludedKeys || []).map(k => String(k).toLowerCase()));\n  const exCoSet = new Set((excludedCos || []).map(c => String(c).toLowerCase().replace(/[^a-z0-9]/g, '')));\n  for (const item of existing) {\n    exKeySet.add(makeKey(item));\n    if (item.domain) exKeySet.add(item.domain.toLowerCase());\n  }\n  const out = [...existing];\n  for (const c of candidates) {\n    if (out.length >= maxCap) break;\n    if (!c.companyName || !c.decisionMakerName) continue;\n    const k = makeKey(c);\n    const coNorm = c.companyName.toLowerCase().replace(/[^a-z0-9]/g, '');\n    if (exKeySet.has(k) || (c.domain && exKeySet.has(c.domain.toLowerCase())) || (coNorm && exCoSet.has(coNorm))) {\n      continue;\n    }\n    exKeySet.add(k);\n    if (c.domain) exKeySet.add(c.domain.toLowerCase());\n    out.push({ ...c, leadKey: k });\n  }\n  return out;\n}\n\nconst state = $input.first().json;\nconst existingFree = Array.isArray(state.freeLeads) ? state.freeLeads : [];\nconst deficit = Math.max(0, (state.maxLeads || 5) - existingFree.length);\n\n// Filter backupLeads so we don't re-check companies already in existingFree or excluded\nconst exCos = new Set([\n  ...(state.excludeCompanies || []),\n  ...existingFree.map(l => l.companyName)\n].map(c => String(c || '').toLowerCase().replace(/[^a-z0-9]/g, '')).filter(Boolean));\n\nconst candidatesForMailmeteor = (state.backupLeads || []).filter(l => {\n  const cn = String(l.companyName || '').toLowerCase().replace(/[^a-z0-9]/g, '');\n  return cn && !exCos.has(cn);\n}).slice(0, 18);\n\nreturn [{\n  json: {\n    ...state,\n    deficitNeeded: deficit,\n    leadpulseUsed: true,\n    candidatesForMailmeteor\n  }\n}];\n"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000150",
+      "name": "5G · Smart Email Guesser (If Invalid · Time-Capped)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4640,
+        -340
+      ],
+      "parameters": {
+        "jsCode": "\nconst state = $input.first().json;\nconst honorifics = new Set(['mr','ms','mrs','dr','er','shri','smt','prof','ca','cs','decision','maker','executive','contact']);\n\nconst enrichedCandidates = (state.candidatesForMailmeteor || []).map(lead => {\n  const dom = String(lead.domain || lead.officialWebsite || '')\n    .toLowerCase()\n    .replace(/^https?:\\/\\/(www\\.)?/, '')\n    .split('/')[0]\n    .trim();\n  const initialEmail = String(lead.email || '').toLowerCase().trim();\n  const parts = String(lead.decisionMakerName || '')\n    .toLowerCase()\n    .split(/\\s+/)\n    .map(p => p.replace(/[^a-z]/g, ''))\n    .filter(p => p.length >= 2 && !honorifics.has(p));\n\n  const smartGuesses = [];\n  if (dom && dom.includes('.')) {\n    if (parts.length >= 1) {\n      const first = parts[0];\n      smartGuesses.push(`${first}@${dom}`);\n      if (parts.length >= 2) {\n        const last = parts[parts.length - 1];\n        smartGuesses.push(`${first}.${last}@${dom}`);\n        smartGuesses.push(`${first[0]}${last}@${dom}`);\n        smartGuesses.push(`${first}${last}@${dom}`);\n        smartGuesses.push(`${first}_${last}@${dom}`);\n        smartGuesses.push(`${first}${last[0]}@${dom}`);\n      }\n    }\n  }\n  const uniqGuesses = Array.from(new Set(smartGuesses)).filter(g => g && g !== initialEmail);\n  return {\n    ...lead,\n    domain: dom || lead.domain || '',\n    smartEmailGuesses: uniqGuesses.slice(0, 6)\n  };\n});\n\nreturn [{\n  json: {\n    ...state,\n    candidatesForMailmeteor: enrichedCandidates,\n    smartGuesserConfig: {\n      enabled: true,\n      perLeadTimeoutSec: 8.0,\n      maxTotalGuessSec: 20.0,\n      behaviorOnTimeout: 'abandon_immediately_and_proceed'\n    }\n  }\n}];\n"
+      },
+      "notes": "Guesses email patterns if TinyFish email is invalid; strict 8s/lead & 20s max cap",
+      "notesInFlow": true
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000054",
+      "name": "5C · Mailmeteor Web Checker (One-by-One)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        4860,
+        -340
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ ($json.candidatesForMailmeteor && $json.candidatesForMailmeteor.length > 0 && $json.deficitNeeded > 0) ? 'http://172.18.0.1:8097/mailmeteor/verify-leads' : 'http://127.0.0.1:5678/healthz' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 90000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ leads: $json.candidatesForMailmeteor || [], needed: $json.deficitNeeded || 5, enableSmartGuesser: true, perLeadTimeoutSec: ($json.smartGuesserConfig && $json.smartGuesserConfig.perLeadTimeoutSec) || 8.0, maxTotalGuessSec: ($json.smartGuesserConfig && $json.smartGuesserConfig.maxTotalGuessSec) || 20.0 }) }}"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000055",
+      "name": "+5D · Attach Mailmeteor Results & Extra Slot",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        5080,
+        -340
+      ],
+      "parameters": {
+        "jsCode": "\nfunction makeKey(lead) {\n  const dom = String(lead.domain || lead.officialWebsite || '').toLowerCase().replace(/^https?:\\/\\/(www\\.)?/, '').split('/')[0].trim();\n  const em = String(lead.email || '').toLowerCase().trim();\n  const nm = String(lead.decisionMakerName || '').toLowerCase().replace(/[^a-z0-9]/g, '');\n  const co = String(lead.companyName || '').toLowerCase().replace(/[^a-z0-9]/g, '');\n  return em || (dom && nm ? `${dom}|${nm}` : `${co}|${nm}`);\n}\nfunction mergeUniqueLeads(existing, candidates, excludedKeys, excludedCos, maxCap) {\n  const exKeySet = new Set((excludedKeys || []).map(k => String(k).toLowerCase()));\n  const exCoSet = new Set((excludedCos || []).map(c => String(c).toLowerCase().replace(/[^a-z0-9]/g, '')));\n  for (const item of existing) {\n    exKeySet.add(makeKey(item));\n    if (item.domain) exKeySet.add(item.domain.toLowerCase());\n  }\n  const out = [...existing];\n  for (const c of candidates) {\n    if (out.length >= maxCap) break;\n    if (!c.companyName || !c.decisionMakerName) continue;\n    const k = makeKey(c);\n    const coNorm = c.companyName.toLowerCase().replace(/[^a-z0-9]/g, '');\n    if (exKeySet.has(k) || (c.domain && exKeySet.has(c.domain.toLowerCase())) || (coNorm && exCoSet.has(coNorm))) {\n      continue;\n    }\n    exKeySet.add(k);\n    if (c.domain) exKeySet.add(c.domain.toLowerCase());\n    out.push({ ...c, leadKey: k });\n  }\n  return out;\n}\n\n// +5D EXTRA VERIFIER BRANCH SLOT (Attaches One-by-One Mailmeteor + Smart Guesser Results)\nconst state = $('5G · Smart Email Guesser (If Invalid · Time-Capped)').first().json;\nconst mmResp = $input.first().json || {};\nconst gStats = mmResp.guesserStats || {};\n\nconst verifiedFromMailmeteor = (Array.isArray(mmResp.verifiedLeads) ? mmResp.verifiedLeads : []).map(l => ({\n  ...l,\n  emailVerified: true,\n  verificationStatus: l.mailmeteorStatus === 'valid' ? 'valid' : 'accept_all',\n  verificationSource: l.verificationSource || 'mailmeteor_web_checker',\n  verifiedBy: l.verificationSource || 'mailmeteor_web_checker'\n}));\n\nconst combined = mergeUniqueLeads(\n  state.freeLeads || [],\n  verifiedFromMailmeteor,\n  state.excludedLeadKeys,\n  state.excludeCompanies,\n  state.maxLeads || 5\n);\n\nconst checkLog = Array.isArray(mmResp.checkLog) ? mmResp.checkLog : [];\nconst checkedCount = Number(mmResp.checkedEmailsCount || checkLog.length || 0);\n\nreturn [{\n  json: {\n    ...state,\n    selectedLeads: combined,\n    mailmeteorUsed: checkLog.length > 0,\n    mailmeteorCheckedCount: checkedCount,\n    mailmeteorCheckLog: checkLog,\n    smartGuesserStats: gStats,\n    providerTrace: [\n      ...(state.providerTrace || []),\n      {\n        provider: `race_winner (${state.raceWinner || 'backup'}) -> smart_email_guesser (cap ${gStats.perLeadTimeCapSec || 8}s) -> mailmeteor.com/email-checker`,\n        status: `race_won_in_${state.raceElapsedMs || 0}ms | guessed_recovered=${gStats.emailsRecoveredByGuesser || 0} | time_cap_dropped=${gStats.abandonedDueToTimeCap || 0} | verified=${verifiedFromMailmeteor.length}`,\n        totalSoFar: combined.length\n      }\n    ]\n  }\n}];\n"
+      },
+      "notes": "One-by-One Mailmeteor Web Result + Expandable Slot",
+      "notesInFlow": true
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000060",
+      "name": "06 · Normalize, Deduplicate & Lock Exact 5 Leads",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        5340,
+        0
+      ],
+      "parameters": {
+        "jsCode": "\nfunction makeKey(lead) {\n  const dom = String(lead.domain || lead.officialWebsite || '').toLowerCase().replace(/^https?:\\/\\/(www\\.)?/, '').split('/')[0].trim();\n  const em = String(lead.email || '').toLowerCase().trim();\n  const nm = String(lead.decisionMakerName || '').toLowerCase().replace(/[^a-z0-9]/g, '');\n  const co = String(lead.companyName || '').toLowerCase().replace(/[^a-z0-9]/g, '');\n  return em || (dom && nm ? `${dom}|${nm}` : `${co}|${nm}`);\n}\nfunction mergeUniqueLeads(existing, candidates, excludedKeys, excludedCos, maxCap) {\n  const exKeySet = new Set((excludedKeys || []).map(k => String(k).toLowerCase()));\n  const exCoSet = new Set((excludedCos || []).map(c => String(c).toLowerCase().replace(/[^a-z0-9]/g, '')));\n  for (const item of existing) {\n    exKeySet.add(makeKey(item));\n    if (item.domain) exKeySet.add(item.domain.toLowerCase());\n  }\n  const out = [...existing];\n  for (const c of candidates) {\n    if (out.length >= maxCap) break;\n    if (!c.companyName || !c.decisionMakerName) continue;\n    const k = makeKey(c);\n    const coNorm = c.companyName.toLowerCase().replace(/[^a-z0-9]/g, '');\n    if (exKeySet.has(k) || (c.domain && exKeySet.has(c.domain.toLowerCase())) || (coNorm && exCoSet.has(coNorm))) {\n      continue;\n    }\n    exKeySet.add(k);\n    if (c.domain) exKeySet.add(c.domain.toLowerCase());\n    out.push({ ...c, leadKey: k });\n  }\n  return out;\n}\n\nconst inp = $input.first().json;\nconst rawList = Array.isArray(inp.selectedLeads) ? inp.selectedLeads : (Array.isArray(inp.freeLeads) ? inp.freeLeads : []);\n\nconst locked = mergeUniqueLeads([], rawList, inp.excludedLeadKeys, inp.excludeCompanies, 5).slice(0, 5);\n\nreturn [{\n  json: {\n    requestId: inp.requestId,\n    userId: inp.userId,\n    prompt: inp.prompt,\n    promptKey: inp.promptKey,\n    batchNumber: inp.batchNumber,\n    maxLeads: 5,\n    savedTemplate: inp.savedTemplate,\n    excludedLeadKeys: inp.excludedLeadKeys,\n    excludeCompanies: inp.excludeCompanies,\n    pathway: inp.pathway || 'free_apis',\n    leadpulseUsed: Boolean(inp.leadpulseUsed),\n    mailmeteorUsed: Boolean(inp.mailmeteorUsed),\n    raceWinner: inp.raceWinner || \"none\",\n    raceElapsedMs: Number(inp.raceElapsedMs || 0),\n    mailmeteorCheckedCount: Number(inp.mailmeteorCheckedCount || 0),\n    mailmeteorCheckLog: inp.mailmeteorCheckLog || [],\n    smartGuesserStats: inp.smartGuesserStats || {},\n    providerTrace: inp.providerTrace || [],\n    lockedLeads: locked\n  }\n}];\n"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000070",
+      "name": "7L · Smart LinkedIn Profile / Search Builder",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        5580,
+        0
+      ],
+      "parameters": {
+        "jsCode": "\nconst state = $input.first().json;\nconst leads = (state.lockedLeads || []).map(l => {\n  const rawLi = String(l.linkedinRaw || '').trim();\n  const hasDirect = /^https?:\\/\\/([a-z]{2,3}\\.)?linkedin\\.com\\/in\\//i.test(rawLi);\n  const searchKeywords = encodeURIComponent(`${l.decisionMakerName || ''} ${l.companyName || ''}`.trim());\n  const searchUrl = `https://www.linkedin.com/search/results/people/?keywords=${searchKeywords}`;\n\n  return {\n    ...l,\n    linkedin: {\n      hasDirectUrl: hasDirect,\n      url: hasDirect ? rawLi : searchUrl,\n      searchFallbackUrl: searchUrl,\n      buttonLabel: hasDirect ? 'Open LinkedIn Profile' : 'Search Name + Company on LinkedIn'\n    }\n  };\n});\n\n// Check if any lead is missing an official website URL so TinyFish is called ONLY if needed!\nconst firstMissingWebsiteLead = leads.find(l => !l.officialWebsite);\n\nreturn [{\n  json: {\n    ...state,\n    lockedLeads: leads,\n    needsTinyFishWebsite: Boolean(firstMissingWebsiteLead),\n    tinyFishQuery: firstMissingWebsiteLead ? `${firstMissingWebsiteLead.companyName} official website` : ''\n  }\n}];\n"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000071",
+      "name": "7R · TinyFish API — Official Website Finder",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5820,
+        0
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{ ($json.needsTinyFishWebsite && $env.TINYFISH_KEY) ? (($env.TINYFISH_SEARCH || 'https://api.search.tinyfish.ai') + '/?query=' + encodeURIComponent($json.tinyFishQuery) + '&page=0') : 'http://127.0.0.1:5678/healthz' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Key",
+              "value": "={{ $env.TINYFISH_KEY ?? '' }}"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 35000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000072",
+      "name": "+7R · Attach Website & Extra Scraper Slot",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        6060,
+        0
+      ],
+      "parameters": {
+        "jsCode": "\n// +7R EXTRA WEBSITE SCRAPER BRANCH SLOT (Firecrawl / Jina Reader can plug here)\nconst state = $('7L · Smart LinkedIn Profile / Search Builder').first().json;\nconst tfResp = $input.first().json || {};\nlet tfUsed = false;\n\nlet foundUrl = '';\nlet foundSnippet = '';\nconst results = Array.isArray(tfResp.results) ? tfResp.results : (Array.isArray(tfResp.organic) ? tfResp.organic : []);\nif (state.needsTinyFishWebsite && results.length > 0) {\n  const good = results.find(r => r.url && !/linkedin\\.com|facebook\\.com|instagram\\.com|youtube\\.com|wikipedia\\.org|zaubacorp|indiabiz/i.test(r.url)) || results[0];\n  if (good && good.url) {\n    foundUrl = String(good.url).trim();\n    foundSnippet = String(good.snippet || good.description || '').slice(0, 200);\n    tfUsed = true;\n  }\n}\n\nlet patchedFirst = false;\nconst enriched = (state.lockedLeads || []).map(l => {\n  if (!l.officialWebsite && foundUrl && !patchedFirst) {\n    patchedFirst = true;\n    const dom = foundUrl.replace(/^https?:\\/\\/(www\\.)?/i, '').split('/')[0].toLowerCase();\n    return {\n      ...l,\n      officialWebsite: foundUrl,\n      domain: l.domain || dom,\n      companySummary: l.companySummary || foundSnippet\n    };\n  }\n  return l;\n});\n\nreturn [{\n  json: {\n    ...state,\n    lockedLeads: enriched,\n    tinyFishUsed: tfUsed\n  }\n}];\n"
+      },
+      "notes": "Expandable Research Slot",
+      "notesInFlow": true
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000080",
+      "name": "8L · Prepare User's Saved Email Template",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        6320,
+        0
+      ],
+      "parameters": {
+        "jsCode": "\nconst state = $input.first().json;\nconst tpl = state.savedTemplate || {};\nconst leads = state.lockedLeads || [];\n\nconst leadBriefs = leads.map((l, idx) => ({\n  index: idx,\n  companyName: l.companyName,\n  decisionMakerName: l.decisionMakerName,\n  jobTitle: l.jobTitle,\n  industry: l.industry || 'B2B',\n  officialWebsite: l.officialWebsite || '',\n  companySummary: l.companySummary || ''\n}));\n\nconst llmSystemPrompt = [\n  \"You personalize a user's saved B2B cold outreach email template for each lead.\",\n  \"STRICT RULES:\",\n  \"1. Preserve the user's core offer, intent, tone, and sign-off from their saved template.\",\n  \"2. Use ONLY real provided facts (decisionMakerName, jobTitle, companyName, industry, companySummary).\",\n  \"3. NEVER invent fake email addresses, fake awards, or unverified company claims.\",\n  \"4. Return ONLY valid JSON in exact format: {\\\"emails\\\":[{\\\"index\\\":0,\\\"subject\\\":\\\"...\\\",\\\"body\\\":\\\"...\\\"}]}\"\n].join('\\n');\n\nconst llmUserPrompt = JSON.stringify({\n  savedEmailTemplate: tpl,\n  leads: leadBriefs\n});\n\nreturn [{\n  json: {\n    ...state,\n    llmSystemPrompt,\n    llmUserPrompt,\n    hasLeadsForLlm: leads.length > 0\n  }\n}];\n"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000081",
+      "name": "08 · Primary LLM Personalizer (xKiro)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        6560,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ ($json.hasLeadsForLlm && $env.LLM2_KEY) ? (($env.LLM2_BASE || 'https://api.xkiro.com/v1') + '/chat/completions') : 'http://127.0.0.1:5678/healthz' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ 'Bearer ' + ($env.LLM2_KEY ?? '') }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 45000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ model: 'qwen/qwen3.7-flash:free', temperature: 0.3, messages: [ { role: 'system', content: $json.llmSystemPrompt }, { role: 'user', content: $json.llmUserPrompt } ], max_tokens: 2200 }) }}"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000082",
+      "name": "8A · Check Primary LLM Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        6780,
+        0
+      ],
+      "parameters": {
+        "jsCode": "\nconst state = $('8L · Prepare User\\'s Saved Email Template').first().json;\nconst resp = $input.first().json || {};\n\nif (!state.hasLeadsForLlm) {\n  return [{ json: { ...state, personalizedMap: {}, llmProviderUsed: 'none_0_leads', llmStatus: 'ok' } }];\n}\n\nlet parsed = null;\ntry {\n  const rawTxt = resp?.choices?.[0]?.message?.content || '';\n  if (rawTxt) {\n    const clean = String(rawTxt).trim().replace(/^```(?:json)?\\s*/i, '').replace(/\\s*```$/i, '');\n    const s = clean.indexOf('{');\n    const e = clean.lastIndexOf('}');\n    if (s >= 0 && e > s) {\n      const obj = JSON.parse(clean.slice(s, e + 1));\n      if (Array.isArray(obj.emails) && obj.emails.length > 0) {\n        parsed = {};\n        for (const item of obj.emails) {\n          parsed[Number(item.index)] = {\n            subject: String(item.subject || '').trim(),\n            body: String(item.body || '').trim()\n          };\n        }\n      }\n    }\n  }\n} catch {}\n\nreturn [{\n  json: {\n    ...state,\n    personalizedMap: parsed || {},\n    llmProviderUsed: parsed ? 'primary_llm_xkiro' : '',\n    llmStatus: parsed ? 'ok' : 'need_backup'\n  }\n}];\n"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000083",
+      "name": "IF 08 · Primary LLM Succeeded?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        6980,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "version": 2,
+            "leftValue": "",
+            "rightValue": ""
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.llmStatus }}",
+              "rightValue": "ok",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000084",
+      "name": "8R · Backup LLM API Key (Failover)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        7200,
+        220
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ ($env.LLM2_KEY) ? (($env.LLM2_BASE || 'https://api.xkiro.com/v1') + '/chat/completions') : (($env.GEMINI_BASE || 'https://generativelanguage.googleapis.com/v1beta') + '/models/' + ($env.GEMINI_MODEL || 'gemini-2.5-flash') + ':generateContent') }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ $env.LLM2_KEY ? ('Bearer ' + $env.LLM2_KEY) : '' }}"
+            },
+            {
+              "name": "x-goog-api-key",
+              "value": "={{ (!$env.LLM2_KEY && $env.GEMINI_KEY) ? $env.GEMINI_KEY : '' }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 45000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $env.LLM2_KEY ? JSON.stringify({ model: 'mistralai/mistral-large-2512', temperature: 0.3, messages: [{ role: 'system', content: $json.llmSystemPrompt }, { role: 'user', content: $json.llmUserPrompt }], max_tokens: 2200 }) : JSON.stringify({ contents: [{ parts: [{ text: $json.llmSystemPrompt + '\\n\\nINPUT:\\n' + $json.llmUserPrompt }] }] }) }}"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000085",
+      "name": "+8R · Extra Free LLM Keys Slot",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        7400,
+        220
+      ],
+      "parameters": {
+        "jsCode": "\n// +8R EXTRA FREE LLM KEYS SLOT (Groq / OpenRouter / Mistral can plug here)\nconst state = $('IF 08 · Primary LLM Succeeded?').first().json;\nconst resp = $input.first().json || {};\nlet parsed = null;\n\ntry {\n  const rawTxt = resp?.candidates?.[0]?.content?.parts?.[0]?.text || resp?.choices?.[0]?.message?.content || '';\n  if (rawTxt) {\n    const clean = String(rawTxt).trim().replace(/^```(?:json)?\\s*/i, '').replace(/\\s*```$/i, '');\n    const s = clean.indexOf('{');\n    const e = clean.lastIndexOf('}');\n    if (s >= 0 && e > s) {\n      const obj = JSON.parse(clean.slice(s, e + 1));\n      if (Array.isArray(obj.emails) && obj.emails.length > 0) {\n        parsed = {};\n        for (const item of obj.emails) {\n          parsed[Number(item.index)] = {\n            subject: String(item.subject || '').trim(),\n            body: String(item.body || '').trim()\n          };\n        }\n      }\n    }\n  }\n} catch {}\n\nreturn [{\n  json: {\n    ...state,\n    personalizedMap: parsed || {},\n    llmProviderUsed: parsed ? 'backup_llm_failover' : 'deterministic_template_fill'\n  }\n}];\n"
+      },
+      "notes": "Expandable LLM Key Pool",
+      "notesInFlow": true
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000090",
+      "name": "8C · Attach 5 Customized Emails",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        7640,
+        0
+      ],
+      "parameters": {
+        "jsCode": "\nconst state = $input.first().json;\nconst tpl = state.savedTemplate || {};\nconst pMap = state.personalizedMap || {};\n\nfunction fillPlaceholders(str, lead) {\n  const firstName = String(lead.decisionMakerName || 'there').split(/\\s+/)[0];\n  return String(str || '')\n    .replace(/\\{\\{\\s*companyName\\s*\\}\\}|\\[Company Name\\]/gi, lead.companyName || 'your company')\n    .replace(/\\{\\{\\s*decisionMakerName\\s*\\}\\}|\\[Decision Maker Name\\]|\\[Name\\]/gi, firstName)\n    .replace(/\\{\\{\\s*fullName\\s*\\}\\}/gi, lead.decisionMakerName || firstName)\n    .replace(/\\{\\{\\s*jobTitle\\s*\\}\\}|\\[Role\\]|\\[Job Title\\]/gi, lead.jobTitle || 'team lead')\n    .replace(/\\{\\{\\s*industry\\s*\\}\\}|\\[Industry\\]/gi, lead.industry || 'your industry')\n    .replace(/\\{\\{\\s*senderName\\s*\\}\\}|\\[Your Name\\]/gi, tpl.senderName || 'Vaishnavi Zende');\n}\n\nconst finalLeads = (state.lockedLeads || []).map((l, idx) => {\n  const custom = pMap[idx];\n  const subject = (custom && custom.subject) ? custom.subject : fillPlaceholders(tpl.subject, l);\n  const body = (custom && custom.body) ? custom.body : fillPlaceholders(tpl.body, l);\n\n  return {\n    leadNumber: ((state.batchNumber - 1) * 5) + idx + 1,\n    batchNumber: state.batchNumber,\n    leadKey: l.leadKey,\n    companyName: l.companyName,\n    officialWebsite: l.officialWebsite || '',\n    companySummary: l.companySummary || '',\n    industry: l.industry || '',\n    location: l.location || '',\n    decisionMakerName: l.decisionMakerName,\n    jobTitle: l.jobTitle,\n    linkedin: l.linkedin,\n    email: {\n      address: l.email || '',\n      verificationStatus: l.email ? (l.verificationStatus || (l.emailVerified ? 'valid' : 'unverified')) : 'unverified',\n      verifiedBy: l.verifiedBy || l.verificationSource || 'none'\n    },\n    sourceProvider: l.sourceProvider,\n    customizedEmail: {\n      subject,\n      body\n    }\n  };\n});\n\nreturn [{\n  json: {\n    ...state,\n    finalLeads\n  }\n}];\n"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000091",
+      "name": "09 · Save Prompt History, Lead IDs & Quota Log",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        7880,
+        0
+      ],
+      "parameters": {
+        "jsCode": "\nconst state = $input.first().json;\nconst store = $getWorkflowStaticData('global');\nif (!store.seenByPrompt) store.seenByPrompt = {};\nif (!store.history) store.history = [];\nif (!store.quotaLog) store.quotaLog = {};\n\nconst pMem = store.seenByPrompt[state.promptKey] || { keys: [], companies: [], batches: 0 };\nconst newKeys = state.finalLeads.map(l => l.leadKey).filter(Boolean);\nconst newCos = state.finalLeads.map(l => l.companyName).filter(Boolean);\n\npMem.keys = Array.from(new Set([...(pMem.keys || []), ...newKeys])).slice(-500);\npMem.companies = Array.from(new Set([...(pMem.companies || []), ...newCos])).slice(-500);\npMem.batches = Math.max(Number(pMem.batches || 0), Number(state.batchNumber || 1));\nstore.seenByPrompt[state.promptKey] = pMem;\n\n// Update Quota Log\nif (state.leadpulseUsed) store.quotaLog.leadpulse_fallbacks = (store.quotaLog.leadpulse_fallbacks || 0) + 1;\nif (state.mailmeteorUsed) store.quotaLog.mailmeteor_verifications = (store.quotaLog.mailmeteor_verifications || 0) + (state.mailmeteorCheckedCount || 0);\nif (state.tinyFishUsed) store.quotaLog.tinyfish_enrichments = (store.quotaLog.tinyfish_enrichments || 0) + 1;\nif (state.finalLeads.length > 0) store.quotaLog.llm_personalizations = (store.quotaLog.llm_personalizations || 0) + 1;\n\n// Save to Prompt History (keep latest 50 batches)\nconst historyEntry = {\n  id: state.requestId,\n  createdAt: new Date().toISOString(),\n  userId: state.userId,\n  prompt: state.prompt,\n  batchNumber: state.batchNumber,\n  leadRange: `${(state.batchNumber - 1) * 5 + 1}–${(state.batchNumber - 1) * 5 + state.finalLeads.length}`,\n  leadsReturned: state.finalLeads.length,\n  routeUsed: state.leadpulseUsed ? `race_winner_${state.raceWinner || 'backup'}_mailmeteor_web` : 'free_lead_ai_waterfall',\n  mailmeteorUsed: state.mailmeteorUsed,\n  llmUsed: state.llmProviderUsed,\n  leads: state.finalLeads\n};\nstore.history = [historyEntry, ...(store.history || [])].slice(0, 50);\n\n// Build ready CSV export string\nfunction csvCell(v) {\n  const s = String(v ?? '').replace(/\"/g, '\"\"');\n  return `\"${s}\"`;\n}\nconst csvRows = [\n  ['Lead #', 'Company Name', 'Official Website', 'Decision Maker', 'Job Title', 'LinkedIn URL', 'LinkedIn Type', 'Email', 'Verification Status', 'Source', 'Custom Email Subject', 'Custom Email Body'].map(csvCell).join(',')\n];\nfor (const l of state.finalLeads) {\n  csvRows.push([\n    l.leadNumber,\n    l.companyName,\n    l.officialWebsite,\n    l.decisionMakerName,\n    l.jobTitle,\n    l.linkedin?.url || '',\n    l.linkedin?.hasDirectUrl ? 'Direct Profile' : 'LinkedIn Search',\n    l.email?.address || '',\n    l.email?.verificationStatus || 'unverified',\n    l.sourceProvider,\n    l.customizedEmail?.subject || '',\n    l.customizedEmail?.body || ''\n  ].map(csvCell).join(','));\n}\n\nreturn [{\n  json: {\n    ok: true,\n    workflow: 'B2B Smart LeadFlow (Locked Architecture v1)',\n    requestId: state.requestId,\n    prompt: state.prompt,\n    batchNumber: state.batchNumber,\n    maxLeadsPerBatch: 5,\n    leadsCount: state.finalLeads.length,\n    leadRange: historyEntry.leadRange,\n    routingSummary: {\n      pathwaySelected: state.pathway || 'free_apis',\n      primaryRoute: state.pathway === 'tinyfish' ? 'tinyfish_pathway_smart_guesser_mailmeteor' : historyEntry.routeUsed,\n      parallelBackupRaceWinner: state.raceWinner || 'none',\n      parallelBackupRaceMs: state.raceElapsedMs || 0,\n      leadpulseOrTinyfishFallbackUsed: state.leadpulseUsed,\n      smartEmailGuesser: state.smartGuesserStats || {},\n      mailmeteorWebCheckerUrl: 'https://mailmeteor.com/email-checker',\n      mailmeteorOneByOneCheckedCount: state.mailmeteorUsed ? (state.mailmeteorCheckLog?.length || state.mailmeteorCheckedCount) : 0,\n      mailmeteorCheckLog: state.mailmeteorCheckLog || [],\n      tinyFishWebsiteLookupUsed: Boolean(state.tinyFishUsed),\n      llmPersonalizerUsed: state.llmProviderUsed,\n      providerTrace: state.providerTrace\n    },\n    leads: state.finalLeads,\n    savedEmailTemplate: state.savedTemplate,\n    make5AnotherLeadsPayload: {\n      prompt: state.prompt,\n      userId: state.userId,\n      batchNumber: state.batchNumber + 1,\n      makeAnother5: true,\n      excludedLeadKeys: pMem.keys,\n      excludeCompanies: pMem.companies\n    },\n    csvExport: csvRows.join('\\n')\n  }\n}];\n"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000092",
+      "name": "10 · Reply 5 Lead Cards + CSV Ready",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        8120,
+        0
+      ],
+      "parameters": {
+        "respondWith": "firstIncomingItem",
+        "options": {}
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000101",
+      "name": "Webhook · POST /b2b-smart-leads-template",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -2140,
+        640
+      ],
+      "webhookId": "b2b-smart-leads-template",
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "b2b-smart-leads-template",
+        "responseMode": "responseNode",
+        "options": {}
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000102",
+      "name": "Save My Email Template",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1840,
+        640
+      ],
+      "parameters": {
+        "jsCode": "\nconst raw = $input.first().json;\nconst body = (raw && typeof raw.body === 'object' && raw.body !== null) ? raw.body : raw;\nconst store = $getWorkflowStaticData('global');\nif (!store.templates) store.templates = {};\n\nconst userId = String(body.userId || 'public_default').trim() || 'public_default';\nconst tpl = {\n  subject: String(body.subject || body.emailTemplate?.subject || 'Quick collaboration idea for {{companyName}}').trim(),\n  body: String(body.body || body.emailTemplate?.body || 'Hi {{decisionMakerName}},\\n\\nI noticed {{companyName}}...').trim(),\n  senderName: String(body.senderName || body.emailTemplate?.senderName || 'Vaishnavi Zende').trim(),\n  senderCompany: String(body.senderCompany || body.emailTemplate?.senderCompany || '').trim(),\n  updatedAt: new Date().toISOString()\n};\nstore.templates[userId] = tpl;\n\nreturn [{ json: { ok: true, userId, message: 'My Email Template saved successfully!', emailTemplate: tpl } }];\n"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000103",
+      "name": "Reply · Template Saved",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        -1560,
+        640
+      ],
+      "parameters": {
+        "respondWith": "firstIncomingItem",
+        "options": {}
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000111",
+      "name": "Webhook · GET /b2b-smart-leads-history",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -2140,
+        880
+      ],
+      "webhookId": "b2b-smart-leads-history",
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "b2b-smart-leads-history",
+        "responseMode": "responseNode",
+        "options": {}
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000112",
+      "name": "Load Prompt History & Quota Log",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1840,
+        880
+      ],
+      "parameters": {
+        "jsCode": "\nconst raw = $input.first().json || {};\nconst query = raw.query || {};\nconst userId = String(query.userId || 'public_default').trim();\nconst store = $getWorkflowStaticData('global');\n\nconst allHistory = Array.isArray(store.history) ? store.history : [];\nconst filtered = userId === 'all' ? allHistory : allHistory.filter(h => h.userId === userId);\n\nreturn [{\n  json: {\n    ok: true,\n    userId,\n    totalSavedBatches: filtered.length,\n    savedEmailTemplate: (store.templates && store.templates[userId]) || null,\n    quotaLog: store.quotaLog || {},\n    history: filtered\n  }\n}];\n"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000113",
+      "name": "Reply · History",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        -1560,
+        880
+      ],
+      "parameters": {
+        "respondWith": "firstIncomingItem",
+        "options": {}
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000121",
+      "name": "Webhook · GET /b2b-smart-leads-health",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -2140,
+        1120
+      ],
+      "webhookId": "b2b-smart-leads-health",
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "b2b-smart-leads-health",
+        "responseMode": "responseNode",
+        "options": {}
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000122",
+      "name": "Check All 11 Stages & Env Keys",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1840,
+        1120
+      ],
+      "parameters": {
+        "jsCode": "\nreturn [{\n  json: {\n    ok: true,\n    workflowId: 'SmartLeadFlowV1',\n    name: 'B2B Smart LeadFlow · Locked Architecture (v1)',\n    rulesLocked: {\n      maxLeadsPerBatch: 5,\n      defaultPathway: 'free_apis (prospeo_acc_1 -> prospeo_acc_2 -> clay_acc_1 -> clay_acc_2 -> hunter_api -> apollo_api)',\n      optionalPathways: ['free_apis', 'tinyfish'],\n      waterfallOrder: ['prospeo_acc_1', 'prospeo_acc_2', 'clay_acc_1', 'clay_acc_2', 'hunter_api', 'apollo_api', '+future_slot'],\n      parallelBackupRace: 'first_result_wins (leadpulse_ai vs tinyfish_ai)',\n      smartEmailGuesser: 'between_tinyfish_and_mailmeteor (time_capped: 8s/lead, 20s/stage_max)',\n      mailmeteorWebChecker: 'https://mailmeteor.com/email-checker (one_by_one_only_when_free_waterfall_fails_or_tinyfish_pathway)',\n      smartLinkedin: 'direct_profile_or_name_company_search_url',\n      customEmail: 'saved_user_template_with_primary_and_backup_llm',\n      repeatBatchLoop: 'make_5_another_leads_excludes_previous'\n    },\n    providersConfiguredInEnv: {\n      prospeo_key_1: Boolean(($env.PROSPEO_API_KEY_1 || '').trim()),\n      prospeo_key_2: Boolean(($env.PROSPEO_API_KEY_2 || '').trim()),\n      clay_key_1: Boolean(($env.CLAY_API_KEY_1 || '').trim()),\n      clay_key_2: Boolean(($env.CLAY_API_KEY_2 || '').trim()),\n      hunter_api_key: Boolean(($env.HUNTER_API_KEY || '').trim()),\n      apollo_api_key: Boolean(($env.APOLLO_API_KEY || '').trim()),\n      leadpulse_pipeline_key: Boolean(($env.LEADPULSE_PIPELINE_KEY || '').trim()),\n      mailmeteor_api_key: Boolean(($env.MAILMETEOR_API_KEY || '').trim()),\n      local_smtp_verifier: Boolean(($env.VERIFY_URL || '').trim()),\n      tinyfish_api_key: Boolean(($env.TINYFISH_KEY || '').trim()),\n      primary_llm_xkiro: Boolean(($env.LLM2_KEY || '').trim()),\n      backup_llm_gemini_or_apinex: Boolean(($env.GEMINI_KEY || $env.LLM1_KEY || '').trim())\n    },\n    endpoints: {\n      generate5Leads: 'POST /webhook/b2b-smart-leads',\n      saveEmailTemplate: 'POST /webhook/b2b-smart-leads-template',\n      getHistoryAndQuota: 'GET /webhook/b2b-smart-leads-history',\n      healthCheck: 'GET /webhook/b2b-smart-leads-health'\n    }\n  }\n}];\n"
+      }
+    },
+    {
+      "id": "b2bf1000-0000-4000-8000-000000000123",
+      "name": "Reply · System Health",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        -1560,
+        1120
+      ],
+      "parameters": {
+        "respondWith": "firstIncomingItem",
+        "options": {}
+      }
+    }
+  ],
+  "connections": {
+    "01 · Public UI Webhook": {
+      "main": [
+        [
+          {
+            "node": "02 · Batch Lock (Max 5) & Dedupe Memory",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "02 · Batch Lock (Max 5) & Dedupe Memory": {
+      "main": [
+        [
+          {
+            "node": "03 · Dual-Track Parallel Split Router",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "03 · Dual-Track Parallel Split Router": {
+      "main": [
+        [
+          {
+            "node": "3B-1 · LeadPulse AI (Parallel Racer A)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "3B-2 · TinyFish AI (Parallel Racer B)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "4.1A · Prospeo #1 Search",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "3B-1 · LeadPulse AI (Parallel Racer A)": {
+      "main": [
+        [
+          {
+            "node": "3B-Sync · Collect Parallel Racers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "3B-2 · TinyFish AI (Parallel Racer B)": {
+      "main": [
+        [
+          {
+            "node": "3B-Sync · Collect Parallel Racers",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "3B-Sync · Collect Parallel Racers": {
+      "main": [
+        [
+          {
+            "node": "3C · First-Finish Race Winner (To Mailmeteor)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.1A · Prospeo #1 Search": {
+      "main": [
+        [
+          {
+            "node": "4.1P · Prospeo #1 Rate Guard (2s)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.1P · Prospeo #1 Rate Guard (2s)": {
+      "main": [
+        [
+          {
+            "node": "4.1Q · Select Top ICP Candidates (#1)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.1Q · Select Top ICP Candidates (#1)": {
+      "main": [
+        [
+          {
+            "node": "4.1B · Prospeo #1 Enrich Verified",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.1B · Prospeo #1 Enrich Verified": {
+      "main": [
+        [
+          {
+            "node": "4.1C · Check Prospeo #1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.1C · Check Prospeo #1": {
+      "main": [
+        [
+          {
+            "node": "IF 4.1 · 5 Leads Found?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF 4.1 · 5 Leads Found?": {
+      "main": [
+        [
+          {
+            "node": "Green Express Bypass Rail (Skip Unused APIs)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "4.2A · Prospeo #2 Search",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.2A · Prospeo #2 Search": {
+      "main": [
+        [
+          {
+            "node": "4.2P · Prospeo #2 Rate Guard (2s)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.2P · Prospeo #2 Rate Guard (2s)": {
+      "main": [
+        [
+          {
+            "node": "4.2Q · Select Top ICP Candidates (#2)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.2Q · Select Top ICP Candidates (#2)": {
+      "main": [
+        [
+          {
+            "node": "4.2B · Prospeo #2 Enrich Verified",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.2B · Prospeo #2 Enrich Verified": {
+      "main": [
+        [
+          {
+            "node": "4.2C · Check Prospeo #2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.2C · Check Prospeo #2": {
+      "main": [
+        [
+          {
+            "node": "IF 4.2 · 5 Leads Found?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF 4.2 · 5 Leads Found?": {
+      "main": [
+        [
+          {
+            "node": "Green Express Bypass Rail (Skip Unused APIs)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "4.25A · Clay #1 Create Search",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.25A · Clay #1 Create Search": {
+      "main": [
+        [
+          {
+            "node": "4.25B · Clay #1 Run People Search",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.25B · Clay #1 Run People Search": {
+      "main": [
+        [
+          {
+            "node": "4.25Q · Filter Clay #1 Pure Candidates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.25Q · Filter Clay #1 Pure Candidates": {
+      "main": [
+        [
+          {
+            "node": "4.25E · Clay #1 Email Resolver & Verifier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.25E · Clay #1 Email Resolver & Verifier": {
+      "main": [
+        [
+          {
+            "node": "4.25C · Check Clay #1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.25C · Check Clay #1": {
+      "main": [
+        [
+          {
+            "node": "IF 4.25 · 5 Leads Found?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF 4.25 · 5 Leads Found?": {
+      "main": [
+        [
+          {
+            "node": "Green Express Bypass Rail (Skip Unused APIs)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "4.26A · Clay #2 Create Search",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.26A · Clay #2 Create Search": {
+      "main": [
+        [
+          {
+            "node": "4.26B · Clay #2 Run People Search",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.26B · Clay #2 Run People Search": {
+      "main": [
+        [
+          {
+            "node": "4.26Q · Filter Clay #2 Pure Candidates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.26Q · Filter Clay #2 Pure Candidates": {
+      "main": [
+        [
+          {
+            "node": "4.26E · Clay #2 Email Resolver & Verifier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.26E · Clay #2 Email Resolver & Verifier": {
+      "main": [
+        [
+          {
+            "node": "4.26C · Check Clay #2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.26C · Check Clay #2": {
+      "main": [
+        [
+          {
+            "node": "IF 4.26 · 5 Leads Found?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF 4.26 · 5 Leads Found?": {
+      "main": [
+        [
+          {
+            "node": "Green Express Bypass Rail (Skip Unused APIs)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "4.3A · Hunter Free Discover",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.3A · Hunter Free Discover": {
+      "main": [
+        [
+          {
+            "node": "4.3Q · Select Top Hunter Domains",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.3Q · Select Top Hunter Domains": {
+      "main": [
+        [
+          {
+            "node": "4.3B · Hunter Domain Finder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.3B · Hunter Domain Finder": {
+      "main": [
+        [
+          {
+            "node": "4.3C · Check Hunter.io",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.3C · Check Hunter.io": {
+      "main": [
+        [
+          {
+            "node": "IF 4.3 · 5 Leads Found?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF 4.3 · 5 Leads Found?": {
+      "main": [
+        [
+          {
+            "node": "Green Express Bypass Rail (Skip Unused APIs)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "4.4A · Apollo People Search",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.4A · Apollo People Search": {
+      "main": [
+        [
+          {
+            "node": "4.4B · Check Apollo.io",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.4B · Check Apollo.io": {
+      "main": [
+        [
+          {
+            "node": "IF 4.4 · 5 Leads Found?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF 4.4 · 5 Leads Found?": {
+      "main": [
+        [
+          {
+            "node": "Green Express Bypass Rail (Skip Unused APIs)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "+4.5 · Future Free Lead API Slot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "+4.5 · Future Free Lead API Slot": {
+      "main": [
+        [
+          {
+            "node": "Sync · Free Chain + Parallel Race Winner",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Green Express Bypass Rail (Skip Unused APIs)": {
+      "main": [
+        [
+          {
+            "node": "Sync · Free Chain + Parallel Race Winner",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "3C · First-Finish Race Winner (To Mailmeteor)": {
+      "main": [
+        [
+          {
+            "node": "Sync · Free Chain + Parallel Race Winner",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Sync · Free Chain + Parallel Race Winner": {
+      "main": [
+        [
+          {
+            "node": "05 · Evaluate Free Chain Sufficiency",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05 · Evaluate Free Chain Sufficiency": {
+      "main": [
+        [
+          {
+            "node": "05 · Sufficiency Gate (5 Free Leads Ready?)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05 · Sufficiency Gate (5 Free Leads Ready?)": {
+      "main": [
+        [
+          {
+            "node": "06 · Normalize, Deduplicate & Lock Exact 5 Leads",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "5B · Send Race Winner to Mailmeteor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "5B · Send Race Winner to Mailmeteor": {
+      "main": [
+        [
+          {
+            "node": "5G · Smart Email Guesser (If Invalid · Time-Capped)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "5G · Smart Email Guesser (If Invalid · Time-Capped)": {
+      "main": [
+        [
+          {
+            "node": "5C · Mailmeteor Web Checker (One-by-One)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "5C · Mailmeteor Web Checker (One-by-One)": {
+      "main": [
+        [
+          {
+            "node": "+5D · Attach Mailmeteor Results & Extra Slot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "+5D · Attach Mailmeteor Results & Extra Slot": {
+      "main": [
+        [
+          {
+            "node": "06 · Normalize, Deduplicate & Lock Exact 5 Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "06 · Normalize, Deduplicate & Lock Exact 5 Leads": {
+      "main": [
+        [
+          {
+            "node": "7L · Smart LinkedIn Profile / Search Builder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "7L · Smart LinkedIn Profile / Search Builder": {
+      "main": [
+        [
+          {
+            "node": "7R · TinyFish API — Official Website Finder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "7R · TinyFish API — Official Website Finder": {
+      "main": [
+        [
+          {
+            "node": "+7R · Attach Website & Extra Scraper Slot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "+7R · Attach Website & Extra Scraper Slot": {
+      "main": [
+        [
+          {
+            "node": "8L · Prepare User's Saved Email Template",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "8L · Prepare User's Saved Email Template": {
+      "main": [
+        [
+          {
+            "node": "08 · Primary LLM Personalizer (xKiro)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "08 · Primary LLM Personalizer (xKiro)": {
+      "main": [
+        [
+          {
+            "node": "8A · Check Primary LLM Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "8A · Check Primary LLM Output": {
+      "main": [
+        [
+          {
+            "node": "IF 08 · Primary LLM Succeeded?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF 08 · Primary LLM Succeeded?": {
+      "main": [
+        [
+          {
+            "node": "8C · Attach 5 Customized Emails",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "8R · Backup LLM API Key (Failover)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "8R · Backup LLM API Key (Failover)": {
+      "main": [
+        [
+          {
+            "node": "+8R · Extra Free LLM Keys Slot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "+8R · Extra Free LLM Keys Slot": {
+      "main": [
+        [
+          {
+            "node": "8C · Attach 5 Customized Emails",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "8C · Attach 5 Customized Emails": {
+      "main": [
+        [
+          {
+            "node": "09 · Save Prompt History, Lead IDs & Quota Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "09 · Save Prompt History, Lead IDs & Quota Log": {
+      "main": [
+        [
+          {
+            "node": "10 · Reply 5 Lead Cards + CSV Ready",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook · POST /b2b-smart-leads-template": {
+      "main": [
+        [
+          {
+            "node": "Save My Email Template",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save My Email Template": {
+      "main": [
+        [
+          {
+            "node": "Reply · Template Saved",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook · GET /b2b-smart-leads-history": {
+      "main": [
+        [
+          {
+            "node": "Load Prompt History & Quota Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load Prompt History & Quota Log": {
+      "main": [
+        [
+          {
+            "node": "Reply · History",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook · GET /b2b-smart-leads-health": {
+      "main": [
+        [
+          {
+            "node": "Check All 11 Stages & Env Keys",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check All 11 Stages & Env Keys": {
+      "main": [
+        [
+          {
+            "node": "Reply · System Health",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": true,
+  "pinData": {}
+}

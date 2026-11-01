@@ -1,0 +1,29 @@
+{
+  "name": "leadscaler",
+  "version": "4.0.0",
+  "description": "leadScaler — AI B2B Lead Generation, Multi-Stage API Waterfall, Parallel TinyFish Race, Time-Bounded Email Guesser, Mailmeteor Verifier & Personalized Outreach System (78-Node n8n Workflow)",
+  "main": "b2b-smart-leadflow-n8n.json",
+  "scripts": {
+    "test": "node tests/test_workflow_logic.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vaishnavizende1562-cell/leadscaler.git"
+  },
+  "author": "Vaishnavi Zende (https://github.com/vaishnavizende1562-cell)",
+  "keywords": [
+    "leadscaler",
+    "n8n",
+    "b2b-lead-generation",
+    "prospeo",
+    "clay",
+    "hunter",
+    "apollo",
+    "tinyfish",
+    "mailmeteor",
+    "email-verification",
+    "cold-outreach",
+    "workflow-automation"
+  ],
+  "license": "MIT"
+}
